@@ -4,7 +4,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 
 INCLUDES = -I./includes
-SRCS = minishell.c
+SRCS_DIR = srcs
+SRCS = $(SRCS_DIR)/minishell.c
 OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)
