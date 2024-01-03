@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
+#    Updated: 2024/01/03 21:30:22 by seongmik         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 
 NAME = minishell
 CC = cc
@@ -9,7 +21,10 @@ SRCS = $(SRCS_DIR)/minishell.c \
 $(SRCS_DIR)/builtin_main.c \
 $(SRCS_DIR)/builtin_echo.c \
 $(SRCS_DIR)/builtin_cd.c \
-$(SRCS_DIR)/builtin_pwd.c
+$(SRCS_DIR)/builtin_pwd.c \
+$(SRCS_DIR)/builtin_export.c \
+$(SRCS_DIR)/builtin_env.c \
+$(SRCS_DIR)/ft_env.c
 
 OBJS = $(SRCS:.c=.o)
 
