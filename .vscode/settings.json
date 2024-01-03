@@ -1,0 +1,6 @@
+{
+	"files.associations": {
+		"exit_status.h": "c",
+		"builtin.h": "c"
+	}
+}

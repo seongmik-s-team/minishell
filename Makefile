@@ -5,7 +5,12 @@ CFLAGS = -Wall -Wextra -Werror
 
 INCLUDES = -I./includes
 SRCS_DIR = srcs
-SRCS = $(SRCS_DIR)/minishell.c
+SRCS = $(SRCS_DIR)/minishell.c \
+$(SRCS_DIR)/builtin_main.c \
+$(SRCS_DIR)/builtin_echo.c \
+$(SRCS_DIR)/builtin_cd.c \
+$(SRCS_DIR)/builtin_pwd.c
+
 OBJS = $(SRCS:.c=.o)
 
 all : $(NAME)

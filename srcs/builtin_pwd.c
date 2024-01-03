@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/03 19:35:42 by seongmik         ###   ########.fr       */
+/*   Created: 2024/01/03 18:25:30 by seongmik          #+#    #+#             */
+/*   Updated: 2024/01/03 18:26:02 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/builtin.h"
 
-int	main(int argc, char *argv[], char *envp[])
+EXIT_STATUS	builtin_pwd(void)
 {
-	builtin_main(argc, argv, envp);
-	return (0);
+	char	*cwd;
+
+	cwd = getcwd(NULL, 0);
+	if (cwd == NULL)
+	{
+		write(2, "minishell: pwd: ", 16);
+		write(2, strerror(errno), ft_strlen(strerror(errno)));
+		write(2, "\n", 1);
+		return (EXIT_FAILURE);
+	}
+	write(1, cwd, ft_strlen(cwd));
+	write(1, "\n", 1);
+	free(cwd);
+	return (EXIT_SUCCESS);
 }

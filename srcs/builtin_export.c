@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/03 19:35:42 by seongmik         ###   ########.fr       */
+/*   Created: 2024/01/03 18:29:50 by seongmik          #+#    #+#             */
+/*   Updated: 2024/01/03 18:30:18 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/builtin.h"
 
-int	main(int argc, char *argv[], char *envp[])
+EXIT_STATUS	builtin_export(void)
 {
-	builtin_main(argc, argv, envp);
-	return (0);
+	
+	return (EXIT_SUCCESS);
 }
