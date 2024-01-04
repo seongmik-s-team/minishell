@@ -6,14 +6,14 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:25:30 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 14:08:52 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // builtin_pwd() 함수는 pwd 명령어를 실행하는 함수이다.
-EXIT_STATUS	builtin_pwd(void)
+int	builtin_pwd(void)
 {
 	char	*cwd;
 

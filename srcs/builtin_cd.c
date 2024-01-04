@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:13:35 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 14:08:02 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_putstr_fd(char *str, int fd)
 }
 
 // builtin_cd() 함수는 cd 명령어를 실행하는 함수이다.
-EXIT_STATUS	builtin_cd(int argc, char *args[])
+int	builtin_cd(int argc, char *args[])
 {
 	char	*path;
 

@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:03:24 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 14:50:24 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	find_equal(const char *env_str)
 }
 
 // init_env() 함수는 envp로 들어온 초기 환경변수를 env에 저장하는 함수이다.
-EXIT_STATUS	init_env(t_env **env, char *envp[])
+int	init_env(t_env **env, char *envp[])
 {
 	size_t	i;
 	size_t	idx;
@@ -52,7 +52,7 @@ EXIT_STATUS	init_env(t_env **env, char *envp[])
 // 인자가 없으면 환경변수를 모두 출력하고, 인자가 있으면 인자로 들어온 환경변수만 출력한다.
 // value가 NULL이면 출력하지 않는다.
 // env는 변경된 환경에서 command를 실행시켜야 하기 때문에 command가 구현되어야지 사용할 수 있다.
-EXIT_STATUS	builtin_env(t_env *env)
+int	builtin_env(t_env *env)
 {
 	while (env != NULL)
 	{

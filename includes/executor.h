@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:47:22 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 14:48:16 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,6 @@
 # include "exit_status.h"
 # include "env.h"
 
-EXIT_STATUS	execute_command(t_commend *cmd, t_env **env);
+int	execute_command(t_commend *cmd, t_env **env);
 
 #endif

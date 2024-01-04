@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:33:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 14:43:20 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	ft_atoi(const char *str)
 }
 
 // builtin_exit() 함수는 exit 명령어를 실행하는 함수이다.
-EXIT_STATUS	builtin_exit(char *args[])
+int	builtin_exit(char *args[])
 {
 	int		exit_code;
 

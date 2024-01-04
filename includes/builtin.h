@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:40:11 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 14:37:23 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:04:09 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 # include "exit_status.h"
 # include "env.h"
 
-EXIT_STATUS	builtin_main(int argc, char *argv[], char *envp[]);
-int			ft_strlen(char *str);
-EXIT_STATUS	builtin_echo(int argc, char *args[]);
-EXIT_STATUS	builtin_cd(int argc, char *args[]);
-EXIT_STATUS	builtin_pwd(void);
-EXIT_STATUS	builtin_export(t_env *env, char *key, char *value);
-EXIT_STATUS	builtin_env(t_env *env);
-EXIT_STATUS	builtin_unset(t_env *env, char *target);
-EXIT_STATUS	builtin_exit(char *args[]);
+int	builtin_main(int argc, char *argv[], char *envp[]);
+int	ft_strlen(char *str);
+int	builtin_echo(int argc, char *args[]);
+int	builtin_cd(int argc, char *args[]);
+int	builtin_pwd(void);
+int	builtin_export(t_env *env, char *key, char *value);
+int	builtin_env(t_env *env);
+int	builtin_unset(t_env *env, char *target);
+int	builtin_exit(char *args[]);
 
 #endif

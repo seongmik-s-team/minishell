@@ -6,13 +6,13 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:32:39 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 14:37:41 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-EXIT_STATUS	builtin_main(int argc, char *argv[], char *envp[])
+int	builtin_main(int argc, char *argv[], char *envp[])
 {
 	t_env	*env;
 
