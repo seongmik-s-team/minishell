@@ -6,11 +6,11 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:25:30 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/03 18:26:02 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:46:11 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtin.h"
+#include "../includes/minishell.h"
 
 EXIT_STATUS	builtin_pwd(void)
 {

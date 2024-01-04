@@ -6,11 +6,11 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:03:24 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/03 21:41:37 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:46:04 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtin.h"
+#include "../includes/minishell.h"
 
 size_t	find_equal(const char *env_str)
 {

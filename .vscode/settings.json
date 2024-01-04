@@ -2,6 +2,7 @@
 	"files.associations": {
 		"exit_status.h": "c",
 		"builtin.h": "c",
-		"utility": "c"
+		"utility": "c",
+		"minishell.h": "c"
 	}
 }

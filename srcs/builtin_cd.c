@@ -6,11 +6,11 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:13:35 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/03 21:19:36 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:45:55 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtin.h"
+#include "../includes/minishell.h"
 
 void	ft_putstr_fd(char *str, int fd)
 {

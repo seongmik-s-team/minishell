@@ -6,11 +6,11 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:43:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/03 19:34:15 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 13:46:01 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/builtin.h"
+#include "../includes/minishell.h"
 
 int	ft_strlen(char *str)
 {
