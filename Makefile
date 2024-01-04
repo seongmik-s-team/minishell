@@ -6,7 +6,7 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/03 21:30:22 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/04 14:48:34 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,10 @@ $(SRCS_DIR)/builtin_cd.c \
 $(SRCS_DIR)/builtin_pwd.c \
 $(SRCS_DIR)/builtin_export.c \
 $(SRCS_DIR)/builtin_env.c \
-$(SRCS_DIR)/ft_env.c
+$(SRCS_DIR)/builtin_unset.c \
+$(SRCS_DIR)/builtin_exit.c \
+$(SRCS_DIR)/ft_env.c \
+$(SRCS_DIR)/executor_command.c
 
 OBJS = $(SRCS:.c=.o)
 

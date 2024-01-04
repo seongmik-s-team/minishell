@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:27:48 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/03 21:37:10 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:08:38 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*ft_strdup(const char *s1)
 	return (temp);
 }
 
+// env_find() 함수는 env에서 key에 해당하는 환경변수를 찾아서 리턴하는 함수이다.
 t_env	*env_find(t_env *env, char *key)
 {
 	while (env != NULL)
@@ -52,6 +53,7 @@ t_env	*env_find(t_env *env, char *key)
 	return (NULL);
 }
 
+// env_del() 함수는 env에서 key에 해당하는 환경변수를 삭제하는 함수이다.
 int	env_del(t_env *env, char *key)
 {
 	t_env	*target;
@@ -75,6 +77,7 @@ int	env_del(t_env *env, char *key)
 	return (SUCCESS);
 }
 
+// env_add() 함수는 env에 key와 value를 가지는 환경변수를 추가하는 함수이다.
 int	env_add(t_env **env, char *key, char *value)
 {
 	t_env	*new;

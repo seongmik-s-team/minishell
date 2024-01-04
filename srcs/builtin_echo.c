@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:43:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 13:46:01 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:07:55 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	ft_strncmp(char *s1, char *s2, int n)
 	return (s1[i] - s2[i]);
 }
 
+// builtin_echo() 함수는 echo 명령어를 실행하는 함수이다.
 EXIT_STATUS	builtin_echo(int argc, char *args[])
 {
 	int		i;

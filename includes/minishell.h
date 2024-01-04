@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 13:48:13 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 14:46:44 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,17 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
+
+typedef struct s_commend
+{
+	char	*cmd;
+	char	*option;
+	char	**args;
+	char	*redirect_in;
+	char	*redirect_out;
+	int		type;
+}				t_commend;
 
 #endif
