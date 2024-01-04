@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:43:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 14:07:55 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:01:19 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,4 @@ EXIT_STATUS	builtin_echo(int argc, char *args[])
 	if (n_flag == 0)
 		write(1, "\n", 1);
 	return (EXIT_SUCCESS);
-}	
+}
