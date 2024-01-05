@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:03:24 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 17:46:02 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:21:04 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int	init_env(t_env **env, char *envp[])
 	while (envp[i] != NULL)
 	{
 		idx = find_equal(envp[i]);
-		envp[i][idx] = '\0';
-		key = ft_strdup(envp[i]);
-		value = ft_strdup(&envp[i][idx + 1]);
+		key = ft_substr(envp[i], 0, idx);
+		value = ft_substr(envp[i], idx + 1, ft_strlen(envp[i]) - idx - 1);
 		if (key == NULL || value == NULL)
 			return (EXIT_FAILURE);
 		env_add(env, key, value);
@@ -62,8 +61,8 @@ int	builtin_env(t_env *env, char *args[])
 			write(1, env->pair->key, ft_strlen(env->pair->key));
 			write(1, "=", 1);
 			write(1, env->pair->value, ft_strlen(env->pair->value));
+			write(1, "\n", 1);
 		}
-		write(1, "\n", 1);
 		env = env->next;
 	}
 	return (EXIT_SUCCESS);

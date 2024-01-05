@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:29:50 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 15:41:30 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:19:47 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,40 +23,72 @@ void	export_print(t_env *env)
 		if (env->pair->value != NULL)
 		{
 			write(1, "=", 1);
+			write(1, "\"", 1);
 			write(1, env->pair->value, ft_strlen(env->pair->value));
+			write(1, "\"", 1);
 		}
 		write(1, "\n", 1);
 		env = env->next;
 	}
 }
 
+int	in_a_row(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == ' ')
+			return (FAILURE);
+		i++;
+	}
+	return (SUCCESS);
+}
+
+t_pair	make_pair(char *str)
+{
+	t_pair	pair;
+	int		i;
+
+	i = 0;
+	while (str[i] != '\0' && str[i] != '=')
+		i++;
+	pair.key = ft_substr(str, 0, i);
+	if (str[i] == '=')
+		pair.value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
+	else
+		pair.value = NULL;
+	return (pair);
+}
+
 // builtin_export() 함수는 export 명령어를 실행하는 함수이다.
 // key와 value가 모두 NULL이면 환경변수를 출력하고, NULL이 아니면 환경변수를 추가한다.
 int	builtin_export(char *args[], t_env *env)
 {
-	char	*key;
-	char	*value;
+	size_t	i;
+	t_pair	pair;
 
 	if (args == NULL)
-		return (EXIT_FAILURE);
-	if (args[0] != (void *)0)
-		key = ft_strdup(args[0]);
-	else
-		key = NULL;
-	if (args[1] != (void *)0)
-		value = ft_strdup(args[1]);
-	else
-		value = NULL;
-	if (key == NULL && value == NULL)
-	{
+		return (FAILURE);
+	i = 1;
+	if (args[1] == NULL)
 		export_print(env);
-		return (EXIT_SUCCESS);
-	}
-	if (key == NULL)
-		return (EXIT_FAILURE);
-	if (value == NULL)
-		return (env_add(&env, key, NULL));
-	return (env_add(&env, key, value));
+	while (args[i])
+	{
+		pair = make_pair(args[i]);
+		if (in_a_row(pair.key) == FAILURE)
+		{
+			write(2, "minishell: export: `", 20);
+			write(2, pair.key, ft_strlen(pair.key));
+			write(2, "': not a valid identifier\n", 26);
+			return (FAILURE);
+		}
+		else
+			env_add(&env, pair.key, pair.value);
+		args++;
+	}	
+	return (SUCCESS);
 }
 
 // // execve()로 실행되는 경우
