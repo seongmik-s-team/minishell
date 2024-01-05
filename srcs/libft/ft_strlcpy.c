@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Created: 2023/02/11 10:18:57 by seongmik          #+#    #+#             */
+/*   Updated: 2023/03/17 18:39:40 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	t_env	*env;
-	char	*line;
+	size_t	len;
+	size_t	i;
 
-	(void) argc;
-	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
+	len = ft_strlen(src);
+	if (dstsize == 0)
+		return (len);
+	i = 0;
+	while (i < dstsize - 1 && i < len)
 	{
-		line = readline("minishell$ ");
-		if (line == NULL)
-		{
-			write(1, "exit\n", 5);
-			exit(0);
-		}
-		printf("%s\n", line);
-		free(line);
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+		i++;
 	}
-	exit(0);
+	((unsigned char *)dst)[i] = '\0';
+	return (len);
 }

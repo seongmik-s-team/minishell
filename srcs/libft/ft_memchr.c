@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Created: 2023/03/17 19:30:11 by seongmik          #+#    #+#             */
+/*   Updated: 2023/03/18 16:55:26 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_env	*env;
-	char	*line;
+	unsigned char	*p;
+	size_t			i;
 
-	(void) argc;
-	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
+	p = (unsigned char *)s;
+	i = 0;
+	while (i < n)
 	{
-		line = readline("minishell$ ");
-		if (line == NULL)
-		{
-			write(1, "exit\n", 5);
-			exit(0);
-		}
-		printf("%s\n", line);
-		free(line);
+		if (*p == (unsigned char)c)
+			return (p);
+		p++;
+		i++;
 	}
-	exit(0);
+	return (0);
 }

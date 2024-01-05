@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Created: 2023/03/21 15:32:47 by seongmik          #+#    #+#             */
+/*   Updated: 2023/03/22 21:07:31 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_env	*env;
-	char	*line;
+	t_list	*p;
 
-	(void) argc;
-	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
+	if (new == 0 || lst == 0)
+		return ;
+	p = *lst;
+	if (p != 0)
 	{
-		line = readline("minishell$ ");
-		if (line == NULL)
+		while (p->next != 0)
 		{
-			write(1, "exit\n", 5);
-			exit(0);
+			p = p->next;
 		}
-		printf("%s\n", line);
-		free(line);
+		p->next = new;
 	}
-	exit(0);
+	else
+	{
+		*lst = new;
+	}
 }

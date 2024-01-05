@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Created: 2023/03/20 18:19:03 by seongmik          #+#    #+#             */
+/*   Updated: 2023/03/20 18:25:49 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+static void	ft_putnbr_recursive(long long lln, int fd, int depth)
 {
-	t_env	*env;
-	char	*line;
+	char	buf;
 
-	(void) argc;
-	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
+	if (lln == 0 && depth > 0)
+		return ;
+	ft_putnbr_recursive(lln / 10, fd, depth + 1);
+	buf = '0' + (lln % 10);
+	write(fd, &buf, 1);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long long	lln;
+
+	lln = (long long)n;
+	if (lln < 0)
 	{
-		line = readline("minishell$ ");
-		if (line == NULL)
-		{
-			write(1, "exit\n", 5);
-			exit(0);
-		}
-		printf("%s\n", line);
-		free(line);
+		write(fd, "-", 1);
+		lln *= -1;
 	}
-	exit(0);
+	ft_putnbr_recursive(lln, fd, 0);
 }

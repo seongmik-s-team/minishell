@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Created: 2023/03/15 17:53:10 by seongmik          #+#    #+#             */
+/*   Updated: 2023/03/16 15:17:09 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	t_env	*env;
-	char	*line;
+	size_t	i;
 
-	(void) argc;
-	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
+	if (dst == src || len == 0)
+		return (dst);
+	if (src < dst && (size_t)(dst - src) < len)
 	{
-		line = readline("minishell$ ");
-		if (line == NULL)
+		i = len - 1;
+		while (i > 0)
 		{
-			write(1, "exit\n", 5);
-			exit(0);
+			((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
+			i--;
 		}
-		printf("%s\n", line);
-		free(line);
+		((unsigned char *)dst)[i] = ((unsigned char *)src)[i];
 	}
-	exit(0);
+	else
+		ft_memcpy(dst, src, len);
+	return (dst);
 }

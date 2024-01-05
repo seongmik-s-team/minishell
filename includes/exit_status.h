@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   exit_status.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Created: 2024/01/03 16:12:55 by seongmik          #+#    #+#             */
+/*   Updated: 2024/01/04 15:04:19 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef EXIT_STATUS_H
+# define EXIT_STATUS_H
 
-int	main(int argc, char *argv[], char *envp[])
-{
-	t_env	*env;
-	char	*line;
+# define EXIT_SUCCESS	0
+# define EXIT_FAILURE	1
+# define SUCCESS		0
+# define FAILURE		1
 
-	(void) argc;
-	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
-	{
-		line = readline("minishell$ ");
-		if (line == NULL)
-		{
-			write(1, "exit\n", 5);
-			exit(0);
-		}
-		printf("%s\n", line);
-		free(line);
-	}
-	exit(0);
-}
+#endif

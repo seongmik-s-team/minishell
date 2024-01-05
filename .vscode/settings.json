@@ -1,0 +1,32 @@
+{
+	"files.associations": {
+		"exit_status.h": "c",
+		"builtin.h": "c",
+		"utility": "c",
+		"minishell.h": "c",
+		"__bit_reference": "c",
+		"__functional_base": "c",
+		"__node_handle": "c",
+		"algorithm": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"__memory": "c",
+		"functional": "c",
+		"iterator": "c",
+		"limits": "c",
+		"memory": "c",
+		"optional": "c",
+		"ratio": "c",
+		"system_error": "c",
+		"tuple": "c",
+		"type_traits": "c",
+		"vector": "c",
+		"string.h": "c",
+		"libft.h": "c",
+		"executor.h": "c",
+		"__functional_03": "c",
+		"readline.h": "c",
+		"fcntl.h": "c",
+		"history.h": "c"
+	}
+}

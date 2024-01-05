@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Created: 2023/03/18 17:06:56 by seongmik          #+#    #+#             */
+/*   Updated: 2023/03/18 22:44:08 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	t_env	*env;
-	char	*line;
+	size_t	i;
+	size_t	j;
 
-	(void) argc;
-	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
+	if (*needle == '\0')
+		return ((char *)haystack);
+	i = 0;
+	while (i < len && haystack[i] != '\0')
 	{
-		line = readline("minishell$ ");
-		if (line == NULL)
+		j = 0;
+		while (haystack[i + j] == needle[j] && i + j < len)
 		{
-			write(1, "exit\n", 5);
-			exit(0);
+			if (haystack[i + j] == '\0' || needle[j] == '\0')
+				break ;
+			j++;
 		}
-		printf("%s\n", line);
-		free(line);
+		if (needle[j] == '\0')
+			return ((char *)&haystack[i]);
+		i++;
 	}
-	exit(0);
+	return (0);
 }
