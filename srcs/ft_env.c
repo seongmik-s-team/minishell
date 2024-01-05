@@ -6,47 +6,18 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:27:48 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 14:08:38 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:54:26 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	size_t	i;
-
-	i = 0;
-	while (s1 && s2 && s1[i] && s2[i] && (s1[i] == s2[i]))
-		i++;
-	return (s1[i] - s2[i]);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	size_t	i;
-	size_t	len;
-	char	*temp;
-
-	len = 0;
-	while (*(s1 + len))
-		len++;
-	temp = (char *)malloc(sizeof(char) * (len + 1));
-	if (!temp)
-		return (0);
-	i = 0 - 1;
-	while (++i < len)
-		*(temp + i) = *(s1 + i);
-	*(temp + i) = '\0';
-	return (temp);
-}
 
 // env_find() 함수는 env에서 key에 해당하는 환경변수를 찾아서 리턴하는 함수이다.
 t_env	*env_find(t_env *env, char *key)
 {
 	while (env != NULL)
 	{
-		if (ft_strcmp(env->pair->key, key) == 0)
+		if (ft_strncmp(env->pair->key, key, ft_strlen(env->pair->key)) == 0)
 			return (env);
 		env = env->next;
 	}
@@ -105,4 +76,44 @@ int	env_add(t_env **env, char *key, char *value)
 	last->next = new;
 	new->prev = last;
 	return (SUCCESS);
+}
+
+// env_len() 함수는 env의 길이를 리턴하는 함수이다.
+size_t	env_len(t_env *env)
+{
+	size_t	len;
+
+	len = 0;
+	while (env != NULL)
+	{
+		len++;
+		env = env->next;
+	}
+	return (len);
+}
+
+// env_to_envp() 함수는 env를 envp로 변환하는 함수이다.
+char	**env_to_envp(t_env *env)
+{
+	size_t	i;
+	char	**envp;
+
+	envp = (char **)malloc(sizeof(char *) * (env_len(env) + 1));
+	if (envp == NULL)
+		return (NULL);
+	i = 0;
+	while (env != NULL)
+	{
+		if (env->pair->value != NULL)
+		{
+			envp[i] = ft_strjoin(env->pair->key, "=");
+			envp[i] = ft_strjoin(envp[i], env->pair->value);
+		}
+		else
+			envp[i] = ft_strdup(env->pair->key);
+		i++;
+		env = env->next;
+	}
+	envp[i] = NULL;
+	return (envp);
 }

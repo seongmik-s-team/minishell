@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:29:50 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:41:30 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,21 @@ void	export_print(t_env *env)
 
 // builtin_export() 함수는 export 명령어를 실행하는 함수이다.
 // key와 value가 모두 NULL이면 환경변수를 출력하고, NULL이 아니면 환경변수를 추가한다.
-int	builtin_export(t_env *env, char *key, char *value)
+int	builtin_export(char *args[], t_env *env)
 {
+	char	*key;
+	char	*value;
+
+	if (args == NULL)
+		return (EXIT_FAILURE);
+	if (args[0] != (void *)0)
+		key = ft_strdup(args[0]);
+	else
+		key = NULL;
+	if (args[1] != (void *)0)
+		value = ft_strdup(args[1]);
+	else
+		value = NULL;
 	if (key == NULL && value == NULL)
 	{
 		export_print(env);
@@ -45,3 +58,13 @@ int	builtin_export(t_env *env, char *key, char *value)
 		return (env_add(&env, key, NULL));
 	return (env_add(&env, key, value));
 }
+
+// // execve()로 실행되는 경우
+// int	main(int argc, char *argv[], char *envp[])
+// {
+// 	t_env	*env;
+
+// 	(void) argc;
+// 	init_env(&env, envp);
+// 	return (builtin_export(&argv[1], env));
+// }

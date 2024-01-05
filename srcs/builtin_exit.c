@@ -6,27 +6,11 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:33:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:37:09 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// ft_isdigit() 함수는 문자열이 숫자로만 이루어져 있는지 확인하는 함수이다.
-int	ft_isdigit(char *str)
-{
-	char	c;
-
-	while (*str)
-	{
-		c = *str;
-		if ('0' <= c && c <= '9')
-			str++;
-		else
-			return (0);
-	}
-	return (1);
-}
 
 // ft_atoi() 함수는 문자열을 정수로 변환하는 함수이다.
 int	ft_atoi(const char *str)
@@ -62,7 +46,7 @@ int	builtin_exit(char *args[])
 	exit_code = EXIT_SUCCESS;
 	if (args[0] == NULL)
 		exit(exit_code);
-	if (args[0] != NULL && ft_isdigit(args[0]) == 0)
+	if (args[0] != NULL && is_all_digit(args[0]) == 0)
 	{
 		write(2, "minishell: exit: ", 17);
 		write(2, args[0], ft_strlen(args[0]));
@@ -79,3 +63,13 @@ int	builtin_exit(char *args[])
 	exit(exit_code);
 	return (EXIT_SUCCESS);
 }
+
+// // execve()로 실행되는 경우
+// int	main(int argc, char *argv[], char *envp[])
+// {
+// 	t_env	*env;
+
+// 	(void) argc;
+// 	init_env(&env, envp);
+// 	return (builtin_exit(&argv[1]));
+// }

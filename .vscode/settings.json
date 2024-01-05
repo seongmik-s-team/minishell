@@ -21,6 +21,12 @@
 		"tuple": "c",
 		"type_traits": "c",
 		"vector": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"libft.h": "c",
+		"executor.h": "c",
+		"__functional_03": "c",
+		"readline.h": "c",
+		"fcntl.h": "c",
+		"history.h": "c"
 	}
 }

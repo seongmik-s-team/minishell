@@ -6,35 +6,11 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:43:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 16:30:22 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	ft_strlen(char *str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
-int	ft_strncmp(char *s1, char *s2, int n)
-{
-	int		i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (s1[i] != s2[i])
-			break ;
-		i++;
-	}
-	return (s1[i] - s2[i]);
-}
 
 // builtin_echo() 함수는 echo 명령어를 실행하는 함수이다.
 int	builtin_echo(int argc, char *args[])
@@ -63,3 +39,12 @@ int	builtin_echo(int argc, char *args[])
 		write(1, "\n", 1);
 	return (EXIT_SUCCESS);
 }
+
+// // execve()로 실행되는 경우
+// int	main(int argc, char *argv[], char *envp[])
+// {
+// 	t_env	*env;
+
+// 	init_env(&env, envp);
+// 	return (builtin_echo(argc, &argv[1]));
+// }

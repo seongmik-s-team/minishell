@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Created: 2023/03/17 19:18:11 by seongmik          #+#    #+#             */
+/*   Updated: 2023/03/17 19:25:11 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+char	*ft_strrchr(const char *s, int c)
 {
-	t_env	*env;
-	char	*line;
+	char	*p;
+	char	cmp;
+	char	*ret;
 
-	(void) argc;
-	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
+	ret = 0;
+	cmp = (char)c;
+	p = (char *)s;
+	while (*p != '\0')
 	{
-		line = readline("minishell$ ");
-		if (line == NULL)
-		{
-			write(1, "exit\n", 5);
-			exit(0);
-		}
-		printf("%s\n", line);
-		free(line);
+		if (*p == cmp)
+			ret = p;
+		p++;
 	}
-	exit(0);
+	if (*p == cmp)
+		ret = p;
+	if (cmp == '\0' || ret != 0)
+		return (ret);
+	else
+		return (0);
 }

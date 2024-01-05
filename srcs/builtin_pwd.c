@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:25:30 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 15:03:51 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/04 15:41:35 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,3 +30,14 @@ int	builtin_pwd(void)
 	free(cwd);
 	return (EXIT_SUCCESS);
 }
+
+// // execve()로 실행되는 경우
+// int	main(int argc, char *argv[], char *envp[])
+// {
+// 	t_env	*env;
+
+// 	(void) argc;
+// 	(void) argv;
+// 	init_env(&env, envp);
+// 	return (builtin_pwd());
+// }

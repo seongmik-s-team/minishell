@@ -1,36 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Created: 2023/03/19 05:04:56 by seongmik          #+#    #+#             */
+/*   Updated: 2023/03/19 05:09:47 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	main(int argc, char *argv[], char *envp[])
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	t_env	*env;
-	char	*line;
+	char		*ret;
+	size_t		i;
+	size_t		j;
+	size_t		len;
 
-	(void) argc;
-	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
+	i = 0;
+	len = ft_strlen(s1) + ft_strlen(s2);
+	ret = (char *)malloc(sizeof(char) * len + 1);
+	if (ret == 0)
+		return (0);
+	while (i < ft_strlen(s1))
 	{
-		line = readline("minishell$ ");
-		if (line == NULL)
-		{
-			write(1, "exit\n", 5);
-			exit(0);
-		}
-		printf("%s\n", line);
-		free(line);
+		ret[i] = s1[i];
+		i++;
 	}
-	exit(0);
+	j = 0;
+	while (j < ft_strlen(s2))
+	{
+		ret[i] = s2[j];
+		i++;
+		j++;
+	}
+	ret[i] = '\0';
+	return (ret);
 }
