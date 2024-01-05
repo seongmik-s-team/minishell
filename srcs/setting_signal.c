@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 17:34:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:50:40 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:31:07 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,28 @@ int	set_sigquit(void)
 	return (sigaction(SIGQUIT, &act, NULL));
 }
 
+// set_sigint_act() 함수는 SIGINT가 발생했을 때 동작하는 함수이다.
+// ctrl + c를 입력 시, 다음 줄로 넘어간다.
+void	set_sigint_act(void)
+{
+	struct termios	term;
+
+	tcgetattr(STDIN_FILENO, &term);
+	term.c_lflag &= ~ECHOCTL;
+	tcsetattr(STDIN_FILENO, TCSANOW, &term);
+	write(2, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+}
+
 // set_sigint() 함수는 SIGINT를 무시하는 함수이다.
 // TODO: 다음 줄로 넘어가게 처리 변경
 int	set_sigint(void)
 {
 	static struct sigaction	act;
 
-	act.sa_handler = (void *) rl_redisplay;
+	act.sa_handler = (void *) set_sigint_act;
 	return (sigaction(SIGINT, &act, NULL));
 }
 

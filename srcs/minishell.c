@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:52:42 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/05 20:41:45 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char *argv[], char *envp[])
 			write(1, "exit\n", 5);
 			exit(0);
 		}
-		printf("%s\n", line);
+		add_history(line);
 		free(line);
 	}
 	exit(0);
