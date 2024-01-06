@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:27:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 17:31:30 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:15:04 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,9 @@ size_t		find_equal(const char *env_str);
 int			init_env(t_env **env, char *envp[]);
 char		**env_to_envp(t_env *env);
 size_t		env_len(t_env *env);
+t_env		*env_copy(t_env *origin);
+void		free_env(t_env *env);
+int			init_env(t_env **env, char *envp[]);
+t_pair		make_pair(char *str);
 
 #endif

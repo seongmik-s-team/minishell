@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:27:48 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 17:54:26 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/05 22:19:02 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_env	*env_find(t_env *env, char *key)
 {
 	while (env != NULL)
 	{
-		if (ft_strncmp(env->pair->key, key, ft_strlen(env->pair->key)) == 0)
+		if (ft_strncmp(env->pair->key, key, ft_strlen(key) + 1) == 0)
 			return (env);
 		env = env->next;
 	}

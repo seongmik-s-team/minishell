@@ -6,7 +6,7 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/05 17:46:45 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/06 18:59:37 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,11 +27,13 @@ SRCS		:=	$(SRCS_DIR)/minishell.c \
 				$(SRCS_DIR)/builtin_unset.c \
 				$(SRCS_DIR)/builtin_exit.c \
 				$(SRCS_DIR)/ft_env.c \
+				$(SRCS_DIR)/ft_env_util.c \
 				$(SRCS_DIR)/executor_command.c \
 				$(SRCS_DIR)/string_util.c \
 				$(SRCS_DIR)/command.c \
 				$(SRCS_DIR)/heredoc.c \
-				$(SRCS_DIR)/setting_signal.c
+				$(SRCS_DIR)/setting_signal.c \
+				$(SRCS_DIR)/shell_error.c
 
 OBJS		=	$(SRCS:.c=.o)
 
@@ -41,7 +43,7 @@ $(NAME) : $(OBJS)
 	@echo "Compiling..."
 	@$(MAKE) -C $(LIB_DIR);
 	@cp $(LIB_DIR)/libft.a libft.a
-	@$(CC) $(CFLAGS) -o $@ $^ libft.a -lreadline
+	@$(CC) $(CFLAGS) -o $@ $^ libft.a -lreadline # -fsanitize=address
 	@echo "Done !"
 
 %.o : %.c

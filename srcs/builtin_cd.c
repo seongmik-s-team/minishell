@@ -6,18 +6,18 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:13:35 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 16:30:18 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/05 21:09:12 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // builtin_cd() 함수는 cd 명령어를 실행하는 함수이다.
-int	builtin_cd(int argc, char *args[])
+int	builtin_cd(char *args[])
 {
 	char	*path;
 
-	if (argc == 1)
+	if (args[1] == NULL)
 	{
 		path = getenv("HOME");
 		if (path == NULL)

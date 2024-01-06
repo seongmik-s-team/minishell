@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:54:56 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 19:46:41 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/05 19:58:49 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // heredoc_read() 함수는 delimiter를 입력받아서 그 delimiter가 나올 때까지 
 // 표준입력으로부터 읽어서 HERE_DOC_TEMP 파일에 저장하는 함수이다.
-// 이 함수는 '또는 "로 감싸진 deleimiter가 들어올 경우, 워드 확장을 하지 않고 그대로 저장한다.
+// TODO: 이 함수는 '또는 "로 감싸진 deleimiter가 들어올 경우, 워드 확장을 하지 않고 그대로 저장한다.
 int	heredoc_read(char *delimiter)
 {
 	int		fd;

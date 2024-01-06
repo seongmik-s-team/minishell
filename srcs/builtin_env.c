@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:03:24 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 17:46:02 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:09:01 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,19 @@ size_t	find_equal(const char *env_str)
 	return (idx);
 }
 
-// init_env() 함수는 envp로 들어온 초기 환경변수를 env에 저장하는 함수이다.
-int	init_env(t_env **env, char *envp[])
+void	print_env(t_env *env)
 {
-	size_t	i;
-	size_t	idx;
-	char	*key;
-	char	*value;
-
-	*env = NULL;
-	i = 0;
-	while (envp[i] != NULL)
+	while (env != NULL)
 	{
-		idx = find_equal(envp[i]);
-		envp[i][idx] = '\0';
-		key = ft_strdup(envp[i]);
-		value = ft_strdup(&envp[i][idx + 1]);
-		if (key == NULL || value == NULL)
-			return (EXIT_FAILURE);
-		env_add(env, key, value);
-		i++;
+		if (env->pair->value != NULL)
+		{
+			write(1, env->pair->key, ft_strlen(env->pair->key));
+			write(1, "=", 1);
+			write(1, env->pair->value, ft_strlen(env->pair->value));
+			write(1, "\n", 1);
+		}
+		env = env->next;
 	}
-	return (EXIT_SUCCESS);
 }
 
 // builtin_env() 함수는 env 명령어를 실행하는 함수이다.
@@ -54,18 +45,20 @@ int	init_env(t_env **env, char *envp[])
 // TODO: command 구현
 int	builtin_env(t_env *env, char *args[])
 {
-	(void) args;
-	while (env != NULL)
+	size_t	i;
+	t_pair	pair;
+	t_env	*copy;
+
+	copy = env_copy(env);
+	i = 1;
+	while (args[i])
 	{
-		if (env->pair->value != NULL)
-		{
-			write(1, env->pair->key, ft_strlen(env->pair->key));
-			write(1, "=", 1);
-			write(1, env->pair->value, ft_strlen(env->pair->value));
-		}
-		write(1, "\n", 1);
-		env = env->next;
+		pair = make_pair(args[i]);
+		env_add(&copy, pair.key, pair.value);
+		i++;
 	}
+	print_env(copy);
+	free_env(copy);
 	return (EXIT_SUCCESS);
 }
 
