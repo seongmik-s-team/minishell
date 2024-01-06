@@ -6,45 +6,45 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/06 21:26:44 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/06 21:28:22 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	minishell
-CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
+NAME							=	minishell
+CC								=	cc
+CFLAGS							=	-Wall -Wextra -Werror
 
-REDLINE_FALG					= -lreadline
+REDLINE_FALG					=	-lreadline
 
 #-----------------------this flags is for M1 mac-----------------------#
 #before make, you should install readline with brew using below command#
 #brew install readline                                                 #
-M1_MAC_READLINE_FLAGS			= -L/opt/homebrew/opt/readline/lib
-M1_MAC_READLINE_OBJ_FLAGS		= -I/opt/homebrew/opt/readline/include
+M1_MAC_READLINE_FLAGS			=	-L/opt/homebrew/opt/readline/lib
+M1_MAC_READLINE_OBJ_FLAGS		=	-I/opt/homebrew/opt/readline/include
 #----------------------------------------------------------------------#
 
-INCLUDES 	:=	-I./includes
-SRCS_DIR 	:=	srcs
-LIB_DIR		:=	srcs/libft
-SRCS		:=	$(SRCS_DIR)/minishell.c \
-				$(SRCS_DIR)/builtin_main.c \
-				$(SRCS_DIR)/builtin_echo.c \
-				$(SRCS_DIR)/builtin_cd.c \
-				$(SRCS_DIR)/builtin_pwd.c \
-				$(SRCS_DIR)/builtin_export.c \
-				$(SRCS_DIR)/builtin_env.c \
-				$(SRCS_DIR)/builtin_unset.c \
-				$(SRCS_DIR)/builtin_exit.c \
-				$(SRCS_DIR)/ft_env.c \
-				$(SRCS_DIR)/ft_env_util.c \
-				$(SRCS_DIR)/executor_command.c \
-				$(SRCS_DIR)/string_util.c \
-				$(SRCS_DIR)/command.c \
-				$(SRCS_DIR)/heredoc.c \
-				$(SRCS_DIR)/setting_signal.c \
-				$(SRCS_DIR)/shell_error.c
+INCLUDES 						:=	-I./includes
+SRCS_DIR 						:=	srcs
+LIB_DIR							:=	srcs/libft
+SRCS							:=	$(SRCS_DIR)/minishell.c \
+									$(SRCS_DIR)/builtin_main.c \
+									$(SRCS_DIR)/builtin_echo.c \
+									$(SRCS_DIR)/builtin_cd.c \
+									$(SRCS_DIR)/builtin_pwd.c \
+									$(SRCS_DIR)/builtin_export.c \
+									$(SRCS_DIR)/builtin_env.c \
+									$(SRCS_DIR)/builtin_unset.c \
+									$(SRCS_DIR)/builtin_exit.c \
+									$(SRCS_DIR)/ft_env.c \
+									$(SRCS_DIR)/ft_env_util.c \
+									$(SRCS_DIR)/executor_command.c \
+									$(SRCS_DIR)/string_util.c \
+									$(SRCS_DIR)/command.c \
+									$(SRCS_DIR)/heredoc.c \
+									$(SRCS_DIR)/setting_signal.c \
+									$(SRCS_DIR)/shell_error.c
 
-OBJS		=	$(SRCS:.c=.o)
+OBJS							=	$(SRCS:.c=.o)
 
 all : $(NAME)
 
