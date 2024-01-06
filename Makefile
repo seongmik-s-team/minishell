@@ -6,13 +6,22 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/06 19:57:32 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/06 21:26:44 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	minishell
 CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
+
+REDLINE_FALG					= -lreadline
+
+#-----------------------this flags is for M1 mac-----------------------#
+#before make, you should install readline with brew using below command#
+#brew install readline                                                 #
+M1_MAC_READLINE_FLAGS			= -L/opt/homebrew/opt/readline/lib
+M1_MAC_READLINE_OBJ_FLAGS		= -I/opt/homebrew/opt/readline/include
+#----------------------------------------------------------------------#
 
 INCLUDES 	:=	-I./includes
 SRCS_DIR 	:=	srcs
@@ -43,12 +52,12 @@ $(NAME) : $(OBJS)
 	@echo "Compiling..."
 	@$(MAKE) -C $(LIB_DIR);
 	@cp $(LIB_DIR)/libft.a libft.a
-	@$(CC) $(CFLAGS) -o $@ $^ libft.a -lreadline -fsanitize=address
+	@$(CC) $(CFLAGS) -o $@ $^ libft.a $(REDLINE_FALG) $(M1_MAC_READLINE_FLAGS) #-fsanitize=address
 	@echo "Done !"
 
 %.o : %.c
 	@echo "Compiling $<..."
-	@$(CC) $(CFLAGS) -c $^ -o $@
+	@$(CC) $(CFLAGS) $(M1_MAC_READLINE_OBJ_FLAGS) -c $^ -o $@ 
 	@echo "Done !"
 
 clean :
