@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:44:57 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/06 18:23:57 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/07 02:40:35 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,15 @@ int	ft_exec(t_command *cmd, t_env *env)
 	char	**envp;
 	char	**paths;
 	char	*path;
+	t_env	*path_env;
 	size_t	i;
 
 	envp = env_to_envp(env);
 	execve(cmd->path, cmd->args, envp);
-	path = env_find(env, "PATH")->pair->value;
+	path_env = env_find(env, "PATH");
+	if (path_env == NULL)
+		return (EXIT_FAILURE);
+	path = path_env->pair->value;
 	if (path == NULL)
 		return (EXIT_FAILURE);
 	paths = ft_split(path, ':');
@@ -77,14 +81,19 @@ void	ft_free_strs(char **strs)
 int	execute_command(t_command *cmd, t_env *env)
 {
 	int		pid;
+	int		ret;
 
 	if (is_builtin(cmd->path))
 		return (do_builtin(cmd->args, env, is_builtin(cmd->path)));
 	pid = fork();
 	if (pid == 0)
 	{
-		ft_exec(cmd, env);
-		sh_error(cmd->args[0], "command not found");
+		ret = ft_exec(cmd, env);
+		free_env(env);
+		if (ret == EXIT_FAILURE)
+			sh_error(cmd->args[0], strerror(errno));
+		else
+			sh_error(cmd->args[0], "command not found");
 	}
 	else if (pid == -1)
 		sh_error(cmd->args[0], strerror(errno));
