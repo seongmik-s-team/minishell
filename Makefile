@@ -6,7 +6,7 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/06 18:59:37 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/06 19:57:32 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ $(NAME) : $(OBJS)
 	@echo "Compiling..."
 	@$(MAKE) -C $(LIB_DIR);
 	@cp $(LIB_DIR)/libft.a libft.a
-	@$(CC) $(CFLAGS) -o $@ $^ libft.a -lreadline # -fsanitize=address
+	@$(CC) $(CFLAGS) -o $@ $^ libft.a -lreadline -fsanitize=address
 	@echo "Done !"
 
 %.o : %.c
