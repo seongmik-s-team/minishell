@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/19 05:45:25 by seongmik          #+#    #+#             */
-/*   Updated: 2023/03/19 12:20:23 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/06 21:22:03 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,7 @@ static int	ft_fill_word(char **ret, char const *s, char c)
 char	**ft_split(char const *s, char c)
 {
 	char	**ret;
-	size_t	len;
 
-	len = ft_strlen(s);
 	ret = (char **)malloc(sizeof(char *) * (ft_count_word(s, c) + 1));
 	if (ret == 0)
 		return (0);
