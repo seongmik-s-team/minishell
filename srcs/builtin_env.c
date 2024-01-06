@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:03:24 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 22:21:04 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:09:01 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,37 +23,8 @@ size_t	find_equal(const char *env_str)
 	return (idx);
 }
 
-// init_env() 함수는 envp로 들어온 초기 환경변수를 env에 저장하는 함수이다.
-int	init_env(t_env **env, char *envp[])
+void	print_env(t_env *env)
 {
-	size_t	i;
-	size_t	idx;
-	char	*key;
-	char	*value;
-
-	*env = NULL;
-	i = 0;
-	while (envp[i] != NULL)
-	{
-		idx = find_equal(envp[i]);
-		key = ft_substr(envp[i], 0, idx);
-		value = ft_substr(envp[i], idx + 1, ft_strlen(envp[i]) - idx - 1);
-		if (key == NULL || value == NULL)
-			return (EXIT_FAILURE);
-		env_add(env, key, value);
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
-
-// builtin_env() 함수는 env 명령어를 실행하는 함수이다.
-// 인자가 없으면 환경변수를 모두 출력하고, 인자가 있으면 인자로 들어온 환경변수만 출력한다.
-// value가 NULL이면 출력하지 않는다.
-// env는 변경된 환경에서 command를 실행시켜야 하기 때문에 command가 구현되어야지 사용할 수 있다.
-// TODO: command 구현
-int	builtin_env(t_env *env, char *args[])
-{
-	(void) args;
 	while (env != NULL)
 	{
 		if (env->pair->value != NULL)
@@ -65,6 +36,29 @@ int	builtin_env(t_env *env, char *args[])
 		}
 		env = env->next;
 	}
+}
+
+// builtin_env() 함수는 env 명령어를 실행하는 함수이다.
+// 인자가 없으면 환경변수를 모두 출력하고, 인자가 있으면 인자로 들어온 환경변수만 출력한다.
+// value가 NULL이면 출력하지 않는다.
+// env는 변경된 환경에서 command를 실행시켜야 하기 때문에 command가 구현되어야지 사용할 수 있다.
+// TODO: command 구현
+int	builtin_env(t_env *env, char *args[])
+{
+	size_t	i;
+	t_pair	pair;
+	t_env	*copy;
+
+	copy = env_copy(env);
+	i = 1;
+	while (args[i])
+	{
+		pair = make_pair(args[i]);
+		env_add(&copy, pair.key, pair.value);
+		i++;
+	}
+	print_env(copy);
+	free_env(copy);
 	return (EXIT_SUCCESS);
 }
 

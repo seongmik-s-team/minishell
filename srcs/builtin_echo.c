@@ -6,11 +6,22 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:43:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 21:44:06 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:19:22 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	echo_option_n(char *args[])
+{
+	int		n_flag;
+
+	if (ft_strncmp(args[1], "-n", 2) == 0)
+		n_flag = 1;
+	else
+		n_flag = 0;
+	return (n_flag);
+}
 
 // builtin_echo() 함수는 echo 명령어를 실행하는 함수이다.
 int	builtin_echo(char *args[])
@@ -25,13 +36,8 @@ int	builtin_echo(char *args[])
 		write(1, "\n", 1);
 		return (EXIT_SUCCESS);
 	}
-	if (ft_strncmp(args[1], "-n", 2) == 0)
-	{
-		n_flag = 1;
-		i++;
-	}
-	else
-		n_flag = 0;
+	n_flag = echo_option_n(args);
+	i = i + n_flag;
 	strs = args;
 	while (args[i])
 	{

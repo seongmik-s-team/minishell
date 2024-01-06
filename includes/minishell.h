@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 17:44:55 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:58:32 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,9 @@
 # define INT_MIN -2147483648
 # define HERE_DOC_TEMP "/tmp/sh-thd-1641928925"
 
-int	is_all_digit(char *str);
-int	heredoc_read(char *delimiter);
-int	init_sig_setting(void);
+int		is_all_digit(char *str);
+int		heredoc_read(char *delimiter);
+int		init_sig_setting(void);
+void	sh_error(char *cmd, char *msg);
 
 #endif

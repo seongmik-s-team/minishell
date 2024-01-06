@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:40:11 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 21:08:50 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:14:20 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@
 # define BUILTIN_ENV	6
 # define BUILTIN_EXIT	7
 
-int	builtin_main(int argc, char *argv[], char *envp[]);
-int	builtin_echo(char *args[]);
-int	builtin_cd(char *args[]);
-int	builtin_pwd(void);
-int	builtin_export(char *args[], t_env *env);
-int	builtin_env(t_env *env, char *args[]);
-int	builtin_unset(t_env *env, char **args);
-int	builtin_exit(char *args[]);
+int		builtin_main(int argc, char *argv[], char *envp[]);
+int		builtin_echo(char *args[]);
+int		builtin_cd(char *args[]);
+int		builtin_pwd(void);
+int		builtin_export(char *args[], t_env *env);
+int		builtin_env(t_env *env, char *args[]);
+int		builtin_unset(t_env *env, char **args);
+int		builtin_exit(char *args[]);
+int		heredoc_read(char *delimiter);
 
 #endif

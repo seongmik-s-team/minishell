@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:29:50 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 22:19:47 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:14:34 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,22 +44,6 @@ int	in_a_row(char *str)
 		i++;
 	}
 	return (SUCCESS);
-}
-
-t_pair	make_pair(char *str)
-{
-	t_pair	pair;
-	int		i;
-
-	i = 0;
-	while (str[i] != '\0' && str[i] != '=')
-		i++;
-	pair.key = ft_substr(str, 0, i);
-	if (str[i] == '=')
-		pair.value = ft_substr(str, i + 1, ft_strlen(str) - i - 1);
-	else
-		pair.value = NULL;
-	return (pair);
 }
 
 // builtin_export() 함수는 export 명령어를 실행하는 함수이다.
