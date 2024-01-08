@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:40:11 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/07 02:05:27 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:20:53 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define BUILTIN_H
 
 # include "minishell.h"
-# include "exit_status.h"
 # include "env.h"
 
 # define BUILTIN_ECHO	1

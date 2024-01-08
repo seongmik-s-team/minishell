@@ -6,12 +6,13 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 17:07:59 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/06 20:40:31 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:18:43 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// env_copy() 함수는 env를 복사하는 함수이다.
 t_env	*env_copy(t_env *origin)
 {
 	t_env	*copy;
@@ -32,6 +33,7 @@ t_env	*env_copy(t_env *origin)
 	return (copy);
 }
 
+// free_env() 함수는 env를 free하는 함수이다.
 void	free_env(t_env *env)
 {
 	t_env	*tmp;
@@ -53,6 +55,7 @@ void	free_env(t_env *env)
 	}
 }
 
+// env_add() 함수는 key와 value를 가지는 pair를 생성하는 함수이다.
 t_pair	make_pair(char *str)
 {
 	t_pair	pair;

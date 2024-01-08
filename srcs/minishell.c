@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/07 18:23:12 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:07:49 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	print_args(char **args)
 	}
 }
 
+// 빈 문자열인지 확인하는 메서드
 int	is_blank(char *str)
 {
 	int	i;
@@ -52,8 +53,6 @@ void	do_split_command(char *line, t_env *env, int *heredoc_idx)
 	// print_args(cmd->args);
 	word_expand(cmd, env);
 	// print_args(cmd->args);
-	if (is_blank(cmd->args[0]) == 1)
-		return ;
 	if (cmd->path != NULL && is_builtin(cmd->path))
 		do_builtin(cmd->args, env, is_builtin(cmd->path));
 	else if (args[0] != NULL && ft_strncmp(args[0], "<<", 3) == 0)
