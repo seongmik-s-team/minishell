@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:13:35 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 18:10:51 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 21:49:07 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	do_cd(t_shell_info *shinfo, char *path, t_env **env)
 	if (oldcwd == NULL)
 		return (FAILURE);
 	set_oldpwd(shinfo, env, oldcwd);
-	if (chdir(path) == -1)
+	if (chdir(path) != 0)
 	{
 		ft_putstr_fd("cd: ", 2);
 		ft_putstr_fd(path, 2);

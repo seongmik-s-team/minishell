@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:32:39 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 17:49:40 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 20:08:31 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	do_builtin(t_shell_info *shinfo, char **args, t_env **env, int builtin_nbr)
 	else if (builtin_nbr == BUILTIN_EXPORT)
 		return (builtin_export(args, env));
 	else if (builtin_nbr == BUILTIN_PWD)
-		return (builtin_pwd());
+		return (builtin_pwd(shinfo));
 	else if (builtin_nbr == BUILTIN_UNSET)
 		return (builtin_unset(env, args));
 	return (0);
