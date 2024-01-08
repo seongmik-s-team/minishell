@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:33:16 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:44:39 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ typedef struct s_command
 }				t_command;
 
 /* ****************************** string utils ****************************** */
-int			ft_isspace(char c);
-int			is_all_digit(char *str);
-char		*ft_str_tolower(char *str);
-int			is_blank(char *str);
+int			judge_isspace(char c);
+int			judge_isalldigit(char *str);
+int			judge_isblank(char *str);
+char		*modifier_tolower(char *str);
 
 /* ******************************** here doc ******************************** */
 int			heredoc_read(char *delimiter, int *heredoc_idx);

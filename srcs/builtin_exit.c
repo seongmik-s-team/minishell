@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:33:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 21:53:29 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:41:08 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	builtin_exit(char *args[])
 	exit_code = EXIT_SUCCESS;
 	if (args[1] == NULL)
 		print_and_exit(exit_code);
-	if (args[1] != NULL && is_all_digit(args[1]) == 0)
+	if (args[1] != NULL && judge_isalldigit(args[1]) == 0)
 	{
 		write(2, "minishell: exit: ", 17);
 		write(2, args[1], ft_strlen(args[1]));

@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:41:56 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 14:25:27 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:48:03 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	find_word(char *str)
 	if (str[i] == '\0')
 		return (-1);
 	j = i + 1;
-	while (str[j] != '\0' && str[j] != '$' && ft_isspace(str[j]) != 1)
+	while (str[j] != '\0' && str[j] != '$' && judge_isspace(str[j]) != 1)
 		j++;
 	if (i + 1 == j || ft_strlen(str) == 0)
 		return (-1);
@@ -39,7 +39,7 @@ char	*to_word(char *str, int dollar_idx)
 
 	i = dollar_idx + 1;
 	size = 0;
-	while (str[i] != '\0' && str[i] != '$' && ft_isspace(str[i]) == 0)
+	while (str[i] != '\0' && str[i] != '$' && judge_isspace(str[i]) == 0)
 	{
 		i++;
 		size++;

@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:44:57 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 14:33:52 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:41:48 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_builtin(char *path)
 {
 	char	*lower_path;
 
-	lower_path = ft_str_tolower(path);
+	lower_path = modifier_tolower(path);
 	if (lower_path == NULL)
 		sh_error("minishell", strerror(errno));
 	if (ft_strncmp(path, "echo", 5) == 0)
