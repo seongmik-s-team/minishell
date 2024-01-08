@@ -6,17 +6,20 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:27:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/06 17:15:04 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:33:15 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
+/* ***************************** custom headers ***************************** */
 # include "minishell.h"
 
+/* ***************************** system headers ***************************** */
 # include <stddef.h>
 
+/* ****************************** type defines ****************************** */
 typedef struct s_pair
 {
 	char	*key;
@@ -30,6 +33,7 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
+/* *********************************** env ********************************** */
 t_env		*env_find(t_env *env, char *key);
 int			env_del(t_env *env, char *key);
 int			env_add(t_env **env, char *key, char *value);

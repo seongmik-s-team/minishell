@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 14:47:30 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:33:16 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # include <termios.h>
 # include <signal.h>
 
-/* ********************************* define ********************************* */
+/* ******************************** defines ********************************* */
 # define EXIT_SUCCESS		0
 # define EXIT_FAILURE		1
 # define SUCCESS			0
@@ -41,7 +41,7 @@
 # define INT_MIN			-2147483648
 # define HERE_DOC_TEMP		"/tmp/sh-thd-"
 
-/* ******************************* type define ****************************** */
+/* ****************************** type defines ****************************** */
 typedef struct s_shell_info
 {
 	int		heredoc_idx;

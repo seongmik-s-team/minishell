@@ -6,16 +6,18 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:40:11 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 14:20:53 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:33:14 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+/* ***************************** custom headers ***************************** */
 # include "minishell.h"
 # include "env.h"
 
+/* ******************************** defines ********************************* */
 # define BUILTIN_ECHO	1
 # define BUILTIN_CD		2
 # define BUILTIN_PWD	3
@@ -24,6 +26,7 @@
 # define BUILTIN_ENV	6
 # define BUILTIN_EXIT	7
 
+/* ********************************* bulitin ******************************** */
 int		builtin_main(int argc, char *argv[], char *envp[]);
 int		builtin_echo(char *args[]);
 int		builtin_cd(char *args[]);
