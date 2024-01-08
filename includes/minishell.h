@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 17:53:54 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 18:08:14 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,10 @@ t_command	*command_new(char *path, char **args, char *redirect_in, \
 /* ********************************* builtin ******************************** */
 int			return_and_free(int builtin_nbr, char *lower_path);
 int			is_builtin(char *path);
-int			do_builtin(t_shell_info *shinfo, char **args, t_env **env, int builtin_nbr);
-int			builtin_main(t_shell_info *shinfo, int argc, char *argv[], char *envp[]);
+int			do_builtin(t_shell_info *shinfo, char **args, t_env **env, \
+						int builtin_nbr);
+int			builtin_main(t_shell_info *shinfo, int argc, char *argv[], \
+						char *envp[]);
 int			builtin_pwd(t_shell_info *shinfo);
 int			builtin_cd(t_shell_info *shinfo, char *args[], t_env **env);
 
