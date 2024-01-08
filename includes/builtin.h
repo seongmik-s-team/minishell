@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:40:11 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/06 17:14:20 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/07 02:05:27 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ int		builtin_export(char *args[], t_env *env);
 int		builtin_env(t_env *env, char *args[]);
 int		builtin_unset(t_env *env, char **args);
 int		builtin_exit(char *args[]);
-int		heredoc_read(char *delimiter);
 
 #endif

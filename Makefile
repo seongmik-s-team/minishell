@@ -6,7 +6,7 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/06 21:28:22 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/07 03:18:35 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRCS							:=	$(SRCS_DIR)/minishell.c \
 									$(SRCS_DIR)/command.c \
 									$(SRCS_DIR)/heredoc.c \
 									$(SRCS_DIR)/setting_signal.c \
-									$(SRCS_DIR)/shell_error.c
+									$(SRCS_DIR)/shell_error.c \
+									$(SRCS_DIR)/word_expand.c
 
 OBJS							=	$(SRCS:.c=.o)
 

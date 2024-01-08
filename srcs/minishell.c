@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/06 19:13:38 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/07 18:23:12 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,34 +25,53 @@ void	print_args(char **args)
 	}
 }
 
+int	is_blank(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (ft_isspace(str[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 // split을 이용해 커멘드 파싱 & 실행하는 테스트 메서드
-void	do_split_command(char *line, t_env *env)
+void	do_split_command(char *line, t_env *env, int *heredoc_idx)
 {
 	t_command	*cmd;
 	char		**args;
 
 	args = ft_split(line, ' ');
-	print_args(args);
-	if (args[0] != NULL && is_builtin(args[0]))
-		do_builtin(args, env, is_builtin(args[0]));
+	if (args[0] == NULL)
+		return ;
+	cmd = command_new(ft_strdup(args[0]), args, "stdin", "stdout");
+	// print_args(cmd->args);
+	word_expand(cmd, env);
+	// print_args(cmd->args);
+	if (is_blank(cmd->args[0]) == 1)
+		return ;
+	if (cmd->path != NULL && is_builtin(cmd->path))
+		do_builtin(cmd->args, env, is_builtin(cmd->path));
 	else if (args[0] != NULL && ft_strncmp(args[0], "<<", 3) == 0)
-		heredoc_read(args[1]);
+		heredoc_read(args[1], heredoc_idx);
 	else if (args[0] != NULL)
-	{
-		cmd = command_new(args[0], args, "stdin", "stdout");
 		execute_command(cmd, env);
-	}
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_env		*env;
-	char		*line;
+	t_shell_info	shell_info;
+	char			*line;
 
 	(void) argc;
 	(void) argv;
+	shell_info.heredoc_idx = 0;
 	init_sig_setting();
-	init_env(&env, envp);
+	init_env(&(shell_info.env), envp);
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -62,7 +81,7 @@ int	main(int argc, char *argv[], char *envp[])
 			exit(0);
 		}
 		add_history(line);
-		do_split_command(line, env);
+		do_split_command(line, shell_info.env, &(shell_info.heredoc_idx));
 		free(line);
 	}
 	exit(0);

@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/06 17:58:32 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/07 17:05:23 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,19 @@
 
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
-# define HERE_DOC_TEMP "/tmp/sh-thd-1641928925"
+# define HERE_DOC_TEMP "/tmp/sh-thd-"
+
+typedef struct s_shell_info
+{
+	int		heredoc_idx;
+	t_env	*env;
+}				t_shell_info;
 
 int		is_all_digit(char *str);
-int		heredoc_read(char *delimiter);
+int		heredoc_read(char *delimiter, int *heredoc_idx);
 int		init_sig_setting(void);
 void	sh_error(char *cmd, char *msg);
+void	word_expand(t_command *cmd, t_env *env);
+int		ft_isspace(char c);
 
 #endif
