@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:29:50 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:41:17 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 16:09:20 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	in_a_row(char *str)
 
 // builtin_export() 함수는 export 명령어를 실행하는 함수이다.
 // key와 value가 모두 NULL이면 환경변수를 출력하고, NULL이 아니면 환경변수를 추가한다.
-int	builtin_export(char *args[], t_env *env)
+int	builtin_export(char *args[], t_env **env)
 {
 	size_t	i;
 	t_pair	pair;
@@ -58,7 +58,7 @@ int	builtin_export(char *args[], t_env *env)
 		return (FAILURE);
 	i = 1;
 	if (args[1] == NULL)
-		export_print(env);
+		export_print(*env);
 	while (args[i])
 	{
 		pair = make_pair(args[i]);
@@ -70,7 +70,7 @@ int	builtin_export(char *args[], t_env *env)
 			return (FAILURE);
 		}
 		else
-			env_add(&env, pair.key, pair.value);
+			env_add(env, pair.key, pair.value);
 		args++;
 	}	
 	return (SUCCESS);

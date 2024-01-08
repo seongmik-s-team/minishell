@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:42:35 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:50:19 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_args(char **args)
 }
 
 // split을 이용해 커멘드 파싱 & 실행하는 테스트 메서드
-void	do_split_command(char *line, t_env *env, int *heredoc_idx)
+void	do_split_command(t_shell_info *shinfo, char *line, t_env **env, int *heredoc_idx)
 {
 	t_command	*cmd;
 	char		**args;
@@ -36,14 +36,14 @@ void	do_split_command(char *line, t_env *env, int *heredoc_idx)
 		return ;
 	cmd = command_new(ft_strdup(args[0]), args, "stdin", "stdout");
 	// print_args(cmd->args);
-	word_expand(cmd, env);
+	word_expand(cmd, *env);
 	// print_args(cmd->args);
 	if (cmd->path != NULL && is_builtin(cmd->path))
-		do_builtin(cmd->args, env, is_builtin(cmd->path));
+		do_builtin(shinfo, cmd->args, env, is_builtin(cmd->path));
 	else if (args[0] != NULL && ft_strncmp(args[0], "<<", 3) == 0)
 		heredoc_read(args[1], heredoc_idx);
 	else if (args[0] != NULL)
-		execute_command(cmd, env);
+		execute_command(shinfo, cmd, env);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -53,9 +53,7 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void) argc;
 	(void) argv;
-	shell_info.heredoc_idx = 0;
-	init_sig_setting();
-	init_env(&(shell_info.env), envp);
+	init_shell(&shell_info, envp);
 	while (1)
 	{
 		line = readline("minishell$ ");
@@ -65,7 +63,7 @@ int	main(int argc, char *argv[], char *envp[])
 			exit(0);
 		}
 		add_history(line);
-		do_split_command(line, shell_info.env, &(shell_info.heredoc_idx));
+		do_split_command(&shell_info, line, &(shell_info.env), &(shell_info.heredoc_idx));
 		free(line);
 	}
 	exit(0);

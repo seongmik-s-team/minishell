@@ -6,21 +6,21 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:32:39 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/07 15:00:41 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:49:40 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // bulitin 함수의 실행을 분기하는 함수이다.
-int	do_builtin(char **args, t_env *env, int builtin_nbr)
+int	do_builtin(t_shell_info *shinfo, char **args, t_env **env, int builtin_nbr)
 {
 	if (builtin_nbr == BUILTIN_CD)
-		return (builtin_cd(args));
+		return (builtin_cd(shinfo, args, env));
 	else if (builtin_nbr == BUILTIN_ECHO)
 		return (builtin_echo(args));
 	else if (builtin_nbr == BUILTIN_ENV)
-		return (builtin_env(env, args));
+		return (builtin_env(*env, args));
 	else if (builtin_nbr == BUILTIN_EXIT)
 		return (builtin_exit(args));
 	else if (builtin_nbr == BUILTIN_EXPORT)

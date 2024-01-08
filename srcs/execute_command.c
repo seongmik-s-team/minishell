@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:44:57 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:41:48 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:50:27 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,19 +90,19 @@ void	ft_free_strs(char **strs)
 }
 
 // executor_command() 함수는 명령어를 실행하는 함수이다.
-int	execute_command(t_command *cmd, t_env *env)
+int	execute_command(t_shell_info *shinfo, t_command *cmd, t_env **env)
 {
 	int		pid;
 	int		ret;
 
 	// word_expand(cmd, env);
 	if (is_builtin(cmd->path))
-		return (do_builtin(cmd->args, env, is_builtin(cmd->path)));
+		return (do_builtin(shinfo, cmd->args, env, is_builtin(cmd->path)));
 	pid = fork();
 	if (pid == 0)
 	{
-		ret = ft_exec(cmd, env);
-		free_env(env);
+		ret = ft_exec(cmd, *env);
+		free_env(*env);
 		if (ret == EXIT_FAILURE)
 			sh_error(cmd->args[0], strerror(errno));
 		else

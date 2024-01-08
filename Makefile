@@ -6,7 +6,7 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/08 15:43:37 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/08 17:55:03 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,9 @@ SRCS							:=	$(SRCS_DIR)/minishell.c \
 									$(SRCS_DIR)/setting_signal.c \
 									$(SRCS_DIR)/shell_error.c \
 									$(SRCS_DIR)/word_expand.c \
-									$(SRCS_DIR)/word_expand_util.c
+									$(SRCS_DIR)/word_expand_util.c \
+									$(SRCS_DIR)/init_shell.c \
+									$(SRCS_DIR)/init_pwds.c
 
 
 #----------------------------------objects-------------------------------------#

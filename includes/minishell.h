@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:44:39 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:53:54 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_shell_info
 {
 	int		heredoc_idx;
 	t_env	*env;
+	char	*pwd;
+	char	*oldpwd;
 }				t_shell_info;
 
 typedef struct s_command
@@ -71,22 +73,33 @@ int			heredoc_read(char *delimiter, int *heredoc_idx);
 int			set_sigquit(void);
 void		set_sigint_act(void);
 int			set_sigint(void);
-int			init_sig_setting(void);
 
 /* ***************************** minishell utils **************************** */
 void		sh_error(char *cmd, char *msg);
+char		*ft_getcwd(t_shell_info *shinfo);
+
+/* ***************************** shell initialize *************************** */
+int			init_oldpwd(t_env **env, char **sholdpwd);
+int			init_pwd(t_env **env, char **shpwd);
+int			init_pwds(t_env **env, char **shpwd, char **sholdpwd);
+int			init_env(t_env **env, char *envp[]);
+int			init_sig_setting(void);
+int			init_shell(t_shell_info *shinfo, char *envp[]);
 
 /* ******************************* word expand ****************************** */
 void		word_expand(t_command *cmd, t_env *env);
 
 /* ********************************* command ******************************** */
-int			execute_command(t_command *cmd, t_env *env);
+int			execute_command(t_shell_info *shinfo, t_command *cmd, t_env **env);
 t_command	*command_new(char *path, char **args, char *redirect_in, \
 						char *redirect_out);
 
 /* ********************************* builtin ******************************** */
 int			return_and_free(int builtin_nbr, char *lower_path);
 int			is_builtin(char *path);
-int			do_builtin(char **args, t_env *env, int builtin_nbr);
+int			do_builtin(t_shell_info *shinfo, char **args, t_env **env, int builtin_nbr);
+int			builtin_main(t_shell_info *shinfo, int argc, char *argv[], char *envp[]);
+int			builtin_pwd(t_shell_info *shinfo);
+int			builtin_cd(t_shell_info *shinfo, char *args[], t_env **env);
 
 #endif

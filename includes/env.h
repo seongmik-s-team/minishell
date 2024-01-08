@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:27:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:33:15 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 15:50:43 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_env
 
 /* *********************************** env ********************************** */
 t_env		*env_find(t_env *env, char *key);
-int			env_del(t_env *env, char *key);
+int			env_del(t_env **env, char *key);
 int			env_add(t_env **env, char *key, char *value);
 size_t		find_equal(const char *env_str);
 int			init_env(t_env **env, char *envp[]);

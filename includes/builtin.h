@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:40:11 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:33:14 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:53:50 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,10 @@
 # define BUILTIN_EXIT	7
 
 /* ********************************* bulitin ******************************** */
-int		builtin_main(int argc, char *argv[], char *envp[]);
 int		builtin_echo(char *args[]);
-int		builtin_cd(char *args[]);
-int		builtin_pwd(void);
-int		builtin_export(char *args[], t_env *env);
+int		builtin_export(char *args[], t_env **env);
 int		builtin_env(t_env *env, char *args[]);
-int		builtin_unset(t_env *env, char **args);
+int		builtin_unset(t_env **env, char **args);
 int		builtin_exit(char *args[]);
 
 #endif
