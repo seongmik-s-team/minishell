@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 14:07:49 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:34:59 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,6 @@ void	print_args(char **args)
 		printf("args[%d]: %s\n", i, args[i]);
 		i++;
 	}
-}
-
-// 빈 문자열인지 확인하는 메서드
-int	is_blank(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (ft_isspace(str[i]) == 0)
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 // split을 이용해 커멘드 파싱 & 실행하는 테스트 메서드

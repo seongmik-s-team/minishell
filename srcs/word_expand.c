@@ -6,20 +6,11 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:41:56 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/07 16:32:13 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:25:27 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// ft_isspace() 함수는 c가 공백인지 확인하는 함수이다.
-int	ft_isspace(char c)
-{
-	if (c == ' ' || c == '\t' || c == '\n' \
-		|| c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
 
 // find_word() 함수는 str에서 환경변수의 시작 인덱스를 찾는 함수이다.
 int	find_word(char *str)

@@ -6,30 +6,42 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:44:57 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 14:18:53 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:33:52 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// return_and_free() 함수는 builtin_nbr을 반환하고 lower_path를 free하는 함수이다.
+int	return_and_free(int builtin_nbr, char *lower_path)
+{
+	free(lower_path);
+	return (builtin_nbr);
+}
+
 // is_builtin()은 path가 빌트인 함수인지 판별하는 함수이다.
 int	is_builtin(char *path)
 {
+	char	*lower_path;
+
+	lower_path = ft_str_tolower(path);
+	if (lower_path == NULL)
+		sh_error("minishell", strerror(errno));
 	if (ft_strncmp(path, "echo", 5) == 0)
-		return (BUILTIN_ECHO);
+		return (return_and_free(BUILTIN_ECHO, lower_path));
 	else if (ft_strncmp(path, "cd", 3) == 0)
-		return (BUILTIN_CD);
+		return (return_and_free(BUILTIN_CD, lower_path));
 	else if (ft_strncmp(path, "pwd", 4) == 0)
-		return (BUILTIN_PWD);
+		return (return_and_free(BUILTIN_PWD, lower_path));
 	else if (ft_strncmp(path, "export", 7) == 0)
-		return (BUILTIN_EXPORT);
+		return (return_and_free(BUILTIN_EXPORT, lower_path));
 	else if (ft_strncmp(path, "unset", 6) == 0)
-		return (BUILTIN_UNSET);
+		return (return_and_free(BUILTIN_UNSET, lower_path));
 	else if (ft_strncmp(path, "env", 4) == 0)
-		return (BUILTIN_ENV);
+		return (return_and_free(BUILTIN_ENV, lower_path));
 	else if (ft_strncmp(path, "exit", 5) == 0)
-		return (BUILTIN_EXIT);
-	return (0);
+		return (return_and_free(BUILTIN_EXIT, lower_path));
+	return (return_and_free(0, lower_path));
 }
 
 // ft_exec() 함수는 execve()를 실행하는 함수이다.
