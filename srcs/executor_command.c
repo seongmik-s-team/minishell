@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:44:57 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/07 02:40:35 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:02:17 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	execute_command(t_command *cmd, t_env *env)
 	int		pid;
 	int		ret;
 
+	// word_expand(cmd, env);
 	if (is_builtin(cmd->path))
 		return (do_builtin(cmd->args, env, is_builtin(cmd->path)));
 	pid = fork();

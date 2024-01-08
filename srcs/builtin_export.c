@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:29:50 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/06 17:14:34 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:29:47 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	export_print(t_env *env)
 	}
 }
 
+// in_a_row() 함수는 str에 공백이 있는지 확인하는 함수이다.
 int	in_a_row(char *str)
 {
 	int	i;

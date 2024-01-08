@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/07 02:06:06 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/07 17:05:23 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ int		is_all_digit(char *str);
 int		heredoc_read(char *delimiter, int *heredoc_idx);
 int		init_sig_setting(void);
 void	sh_error(char *cmd, char *msg);
+void	word_expand(t_command *cmd, t_env *env);
+int		ft_isspace(char c);
 
 #endif

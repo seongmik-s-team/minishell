@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:54:56 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/07 02:23:08 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:28:21 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 // unique_filename() 함수는 heredoc 파일을 저장할 때 사용할 유니크한 이름의 파일을 생성하는 함수이다.
 char	*unique_filename(int *heredoc_idx)
 {
+	char	*temppath;
 	char	*filename;
 	char	*tmp;
 
-	filename = ft_strdup(HERE_DOC_TEMP);
+	temppath = ft_strdup(HERE_DOC_TEMP);
 	tmp = ft_itoa(*heredoc_idx);
 	*heredoc_idx += 1;
-	filename = ft_strjoin(filename, tmp);
+	filename = ft_strjoin(temppath, tmp);
+	free(temppath);
 	free(tmp);
 	return (filename);
 }
