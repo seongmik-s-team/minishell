@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 15:49:08 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:55:34 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,16 @@ char		*modifier_tolower(char *str);
 char		*modifier_replace(char *str, char *put, size_t here, size_t size);
 char		*modifier_insult(char *str, char *put, size_t here);
 char		*modifier_trpjoin(char *strhead, char *put, char *strrear);
+int			surrounded_singlequote(char *str);
+int			surrounded_doublequote(char *str);
+char		*quote_delsingle(char *str);
+char		*quote_deldouble(char *str);
+char		*quote_del(char *str);
+int			quote_judge_and_del(char **str);
 size_t		get_strslen(char **strs);
 
 /* ******************************** here doc ******************************** */
-int			heredoc_read(char *delimiter);
+int			heredoc_read(char **delimiter, int is_quoted, t_env *env);
 char		*unique_filename(void);
 
 /* ********************************* signal ********************************* */
@@ -136,6 +142,7 @@ void		free_redirections(t_redirect **redirects);
 void		free_cmd(t_command *cmd);
 
 /* ******************************* word expand ****************************** */
+char		*expand_by_env(char *str, t_env *env);
 void		word_expand(t_command *cmd, t_env *env);
 void		args_pull(char **args, size_t len);
 

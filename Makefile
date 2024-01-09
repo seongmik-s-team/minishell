@@ -6,7 +6,7 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/09 15:48:20 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/09 16:29:27 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,9 +45,11 @@ SRCS							:=	$(SRCS_DIR)/minishell.c \
 									$(SRCS_DIR)/ft_env.c \
 									$(SRCS_DIR)/ft_env_util.c \
 									$(SRCS_DIR)/execute_command.c \
+									$(SRCS_DIR)/string_surrounded.c \
 									$(SRCS_DIR)/string_judge.c \
 									$(SRCS_DIR)/string_modifier.c \
 									$(SRCS_DIR)/string_get.c \
+									$(SRCS_DIR)/string_quote.c \
 									$(SRCS_DIR)/command.c \
 									$(SRCS_DIR)/heredoc.c \
 									$(SRCS_DIR)/setting_signal.c \
