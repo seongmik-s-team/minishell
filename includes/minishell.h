@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 17:45:20 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:56:53 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@
 # define INT_MAX			2147483647
 # define INT_MIN			-2147483648
 # define HERE_DOC_TEMP		"/tmp/sh-thd-"
+# define NOT_DOT			0
+# define DOT				1
+# define DOT_DOT			2
+# define SILENCE			1
+# define NOT_SILENCE		0
 
 # define BUILTIN_ECHO		1
 # define BUILTIN_CD			2
@@ -107,6 +112,7 @@ int			judge_isspace(char c);
 int			judge_isalldigit(char *str);
 int			judge_isblank(char *str);
 int			judge_isblank_and_null(char *str);
+int			judge_dot(char *str);
 char		*modifier_tolower(char *str);
 char		*modifier_replace(char *str, char *put, size_t here, size_t size);
 char		*modifier_insult(char *str, char *put, size_t here);
@@ -133,7 +139,8 @@ int			set_sigint(void);
 /* ***************************** minishell utils **************************** */
 
 void		sh_error(char *cmd, char *msg);
-char		*ft_getcwd(t_shell_info *shinfo);
+void		sh_cd_print_error(void);
+char		*ft_getcwd(t_shell_info *shinfo, int is_dot, int silence);
 
 /* ***************************** shell initialize *************************** */
 

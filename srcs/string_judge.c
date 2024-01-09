@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:33:44 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 14:51:05 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:46:41 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,14 @@ int	judge_isblank_and_null(char *str)
 		i++;
 	}
 	return (TRUE);
+}
+
+// judge_dot() 함수는 문자열이 '.' 또는 '..'인지 확인하는 함수이다.
+int	judge_dot(char *str)
+{
+	if (ft_strncmp(str, ".", 2) == 0)
+		return (DOT);
+	else if (ft_strncmp(str, "..", 3) == 0)
+		return (DOT_DOT);
+	return (NOT_DOT);
 }

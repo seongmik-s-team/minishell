@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 18:11:16 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 18:15:01 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:38:01 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*convert_wildcard(char *str)
 	ret = ft_strdup(str);
 	if (ret == NULL)
 		return (NULL);
-	ret = convert_wild_card_question(ret);
-	ret = convert_wild_card_star(ret);
+	// ret = convert_wild_card_question(ret);
+	// ret = convert_wild_card_star(ret);
 	return (ret);
 }

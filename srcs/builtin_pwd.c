@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:25:30 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 13:23:54 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:53:52 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	builtin_pwd(t_shell_info *shinfo)
 {
 	char	*cwd;
 
-	cwd = ft_getcwd(shinfo);
+	cwd = ft_getcwd(shinfo, NOT_DOT, SILENCE);
 	if (cwd == NULL)
 	{
 		write(2, "minishell: pwd: ", 16);

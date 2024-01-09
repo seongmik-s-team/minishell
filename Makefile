@@ -6,7 +6,7 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/09 18:12:45 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/09 18:37:50 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ SRCS							:=	$(SRCS_DIR)/minishell.c \
 									$(SRCS_DIR)/word_expand_util.c \
 									$(SRCS_DIR)/init_shell.c \
 									$(SRCS_DIR)/init_pwds.c \
-									$(SRCS_DIR)/convert_wildcard.c
+									$(SRCS_DIR)/wildcard.c
 
 #----------------------------------objects-------------------------------------#
 OBJS							=	$(SRCS:.c=.o)

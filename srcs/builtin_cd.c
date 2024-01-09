@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:13:35 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 17:44:11 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:58:20 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,23 @@
 
 // ft_getcwd() 함수는 현재 작업 디렉토리를 가져오는 함수이다.
 // getcwd()가 실패한다면 쉘 내부의 pwd를 가져온다.
-char	*ft_getcwd(t_shell_info *shinfo)
+char	*ft_getcwd(t_shell_info *shinfo, int is_dot, int silence)
 {
 	char	*cwd;
 
 	cwd = getcwd(NULL, 0);
+	if (cwd == NULL && is_dot == DOT)
+	{
+		if (silence == NOT_SILENCE)
+			sh_cd_print_error();
+		return (modifier_trpjoin(shinfo->pwd, "/", "."));
+	}
+	if (cwd == NULL && is_dot == DOT_DOT)
+	{
+		if (silence == NOT_SILENCE)
+			sh_cd_print_error();
+		return (modifier_trpjoin(shinfo->pwd, "/", ".."));
+	}
 	if (cwd == NULL && shinfo->pwd != NULL)
 		return (ft_strdup(shinfo->pwd));
 	if (cwd == NULL && shinfo->pwd == NULL)
@@ -65,7 +77,7 @@ int	do_cd(t_shell_info *shinfo, char *path, t_env **env)
 	char	*oldcwd;
 	char	*cwd;
 
-	oldcwd = ft_getcwd(shinfo);
+	oldcwd = ft_getcwd(shinfo, judge_dot(path), SILENCE);
 	if (oldcwd == NULL)
 		return (FAILURE);
 	set_oldpwd(shinfo, env, oldcwd);
@@ -78,7 +90,7 @@ int	do_cd(t_shell_info *shinfo, char *path, t_env **env)
 		ft_putstr_fd("\n", 2);
 		return (FAILURE);
 	}
-	cwd = ft_getcwd(shinfo);
+	cwd = ft_getcwd(shinfo, judge_dot(path), NOT_SILENCE);
 	if (cwd == NULL)
 		return (FAILURE);
 	set_pwd(shinfo, env, cwd);
