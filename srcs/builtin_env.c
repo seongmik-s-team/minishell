@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 21:03:24 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 13:37:06 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:04:40 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ int	builtin_env(char *args[], t_env *env)
 	t_pair	pair;
 	t_env	*copy;
 
+	if (args[1] != NULL)
+	{
+		write(2, "minishell: exit: too many arguments\n", 36);
+		return (FAILURE);
+	}
 	copy = env_copy(env);
 	i = 1;
 	while (args[i])
