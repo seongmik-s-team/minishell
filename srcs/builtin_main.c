@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 19:32:39 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 20:08:31 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:16:38 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@
 int	do_builtin(t_shell_info *shinfo, char **args, t_env **env, int builtin_nbr)
 {
 	if (builtin_nbr == BUILTIN_CD)
-		return (builtin_cd(shinfo, args, env));
+		return (builtin_cd(args, env, shinfo));
 	else if (builtin_nbr == BUILTIN_ECHO)
 		return (builtin_echo(args));
 	else if (builtin_nbr == BUILTIN_ENV)
-		return (builtin_env(*env, args));
+		return (builtin_env(args, *env));
 	else if (builtin_nbr == BUILTIN_EXIT)
 		return (builtin_exit(args));
 	else if (builtin_nbr == BUILTIN_EXPORT)
@@ -28,6 +28,6 @@ int	do_builtin(t_shell_info *shinfo, char **args, t_env **env, int builtin_nbr)
 	else if (builtin_nbr == BUILTIN_PWD)
 		return (builtin_pwd(shinfo));
 	else if (builtin_nbr == BUILTIN_UNSET)
-		return (builtin_unset(env, args));
+		return (builtin_unset(args, env));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 15:43:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:41:00 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:23:25 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	builtin_echo(char *args[])
 	if (args[1] == NULL)
 	{
 		write(1, "\n", 1);
-		return (EXIT_SUCCESS);
+		return (SUCCESS);
 	}
 	n_flag = echo_option_n(args);
 	i = i + n_flag;
@@ -46,7 +46,7 @@ int	builtin_echo(char *args[])
 	}
 	if (n_flag == 0)
 		write(2, "\n", 1);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
 
 // // execve()로 실행되는 경우

@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:14:03 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 17:54:47 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:24:38 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ int	init_shell(t_shell_info *shinfo, char *envp[])
 	init_sig_setting();
 	init_env(&(shinfo->env), envp);
 	if (init_pwds(&(shinfo->env), &(shinfo->pwd), &(shinfo->oldpwd)) == FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		return (FAILURE);
+	return (SUCCESS);
 }

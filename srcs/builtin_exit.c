@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:33:18 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:41:08 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:23:42 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	builtin_exit(char *args[])
 {
 	int		exit_code;
 
-	exit_code = EXIT_SUCCESS;
+	exit_code = SUCCESS;
 	if (args[1] == NULL)
 		print_and_exit(exit_code);
 	if (args[1] != NULL && judge_isalldigit(args[1]) == 0)
@@ -31,17 +31,17 @@ int	builtin_exit(char *args[])
 		write(2, "minishell: exit: ", 17);
 		write(2, args[1], ft_strlen(args[1]));
 		write(2, ": numeric argument required\n", 28);
-		return (EXIT_FAILURE);
+		return (FAILURE);
 	}
 	if (args[1] != NULL && args[2] != NULL)
 	{
 		write(2, "minishell: exit: too many arguments\n", 36);
-		return (EXIT_FAILURE);
+		return (FAILURE);
 	}
 	if (args[1] != NULL)
 		exit_code = ft_atoi(args[1]);
 	print_and_exit(exit_code);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
 
 // // execve()로 실행되는 경우

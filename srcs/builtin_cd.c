@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:13:35 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 21:49:07 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:23:11 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	do_cd(t_shell_info *shinfo, char *path, t_env **env)
 }
 
 // builtin_cd() 함수는 cd 명령어를 실행하는 함수이다.
-int	builtin_cd(t_shell_info *shinfo, char *args[], t_env **env)
+int	builtin_cd(char *args[], t_env **env, t_shell_info *shinfo)
 {
 	char	*path;
 	t_env	*home;
@@ -97,15 +97,15 @@ int	builtin_cd(t_shell_info *shinfo, char *args[], t_env **env)
 		if (home == NULL)
 		{
 			ft_putstr_fd("cd: HOME not set\n", 2);
-			return (EXIT_FAILURE);
+			return (FAILURE);
 		}
 		path = home->pair->value;
 	}
 	else
 		path = args[1];
 	if (do_cd(shinfo, path, env) == FAILURE)
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
+		return (FAILURE);
+	return (SUCCESS);
 }
 
 // // execve()로 실행되는 경우

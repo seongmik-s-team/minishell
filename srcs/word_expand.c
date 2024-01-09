@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:41:56 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:48:03 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:22:01 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,11 @@ char	*expand_by_env(char *str, t_env *env)
 			return (str);
 		expanded_word = ft_substr(str, 0, dollar_idx);
 		if (tmp->pair->value != NULL)
-			expanded_word = ft_strjoin(expanded_word , tmp->pair->value);
+			expanded_word = ft_strjoin(expanded_word, tmp->pair->value);
 		else
-			expanded_word = ft_strjoin(expanded_word , "");
-		rear_str = ft_substr(str, dollar_idx + ft_strlen(word) + 1, ft_strlen(str) - dollar_idx - ft_strlen(word));
+			expanded_word = ft_strjoin(expanded_word, "");
+		rear_str = ft_substr(str, dollar_idx + ft_strlen(word) + 1, \
+								ft_strlen(str) - dollar_idx - ft_strlen(word));
 		expanded_word = ft_strjoin(expanded_word, rear_str);
 		str = expanded_word;
 	}
@@ -85,7 +86,6 @@ void	word_expand(t_command *cmd, t_env *env)
 	int		i;
 
 	i = 0;
-	cmd->path = expand_by_env(cmd->path, env);
 	while (cmd->args[i] != NULL)
 	{
 		cmd->args[i] = expand_by_env(cmd->args[i], env);

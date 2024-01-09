@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 18:08:14 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:22:48 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 /* ***************************** custom headers ***************************** */
 # include "../srcs/libft/libft.h"
-# include "builtin.h"
-# include "env.h"
 
 /* ***************************** system headers ***************************** */
 # include <fcntl.h>
@@ -31,15 +29,22 @@
 # include <sys/wait.h>
 # include <termios.h>
 # include <signal.h>
+# include <stddef.h>
 
 /* ******************************** defines ********************************* */
-# define EXIT_SUCCESS		0
-# define EXIT_FAILURE		1
 # define SUCCESS			0
 # define FAILURE			1
 # define INT_MAX			2147483647
 # define INT_MIN			-2147483648
 # define HERE_DOC_TEMP		"/tmp/sh-thd-"
+
+# define BUILTIN_ECHO		1
+# define BUILTIN_CD			2
+# define BUILTIN_PWD		3
+# define BUILTIN_EXPORT		4
+# define BUILTIN_UNSET		5
+# define BUILTIN_ENV		6
+# define BUILTIN_EXIT		7
 
 /* ****************************** type defines ****************************** */
 typedef struct s_shell_info
@@ -50,15 +55,34 @@ typedef struct s_shell_info
 	char	*oldpwd;
 }				t_shell_info;
 
+typedef struct s_redirect
+{
+	int		type;
+	char	*file;
+	char	*delimiter;
+}				t_redirect;
+
 typedef struct s_command
 {
-	char				*path;
 	char				**args;
-	char				*redirect_in;
-	char				*redirect_out;
-	int					type;
-	struct s_command	*next;
+	t_redirect			**redirects;
+	int					symbol;
+	struct s_command	*left;
+	struct s_command	*right;
 }				t_command;
+
+typedef struct s_pair
+{
+	char	*key;
+	char	*value;
+}				t_pair;
+
+typedef struct s_env
+{
+	t_pair			*pair;
+	struct s_env	*prev;
+	struct s_env	*next;
+}				t_env;
 
 /* ****************************** string utils ****************************** */
 int			judge_isspace(char c);
@@ -94,6 +118,19 @@ int			execute_command(t_shell_info *shinfo, t_command *cmd, t_env **env);
 t_command	*command_new(char *path, char **args, char *redirect_in, \
 						char *redirect_out);
 
+/* *********************************** env ********************************** */
+t_env		*env_find(t_env *env, char *key);
+int			env_del(t_env **env, char *key);
+int			env_add(t_env **env, char *key, char *value);
+size_t		find_equal(const char *env_str);
+int			init_env(t_env **env, char *envp[]);
+char		**env_to_envp(t_env *env);
+size_t		env_len(t_env *env);
+t_env		*env_copy(t_env *origin);
+void		free_env(t_env *env);
+int			init_env(t_env **env, char *envp[]);
+t_pair		make_pair(char *str);
+
 /* ********************************* builtin ******************************** */
 int			return_and_free(int builtin_nbr, char *lower_path);
 int			is_builtin(char *path);
@@ -102,6 +139,11 @@ int			do_builtin(t_shell_info *shinfo, char **args, t_env **env, \
 int			builtin_main(t_shell_info *shinfo, int argc, char *argv[], \
 						char *envp[]);
 int			builtin_pwd(t_shell_info *shinfo);
-int			builtin_cd(t_shell_info *shinfo, char *args[], t_env **env);
+int			builtin_cd(char *args[], t_env **env, t_shell_info *shinfo);
+int			builtin_echo(char *args[]);
+int			builtin_export(char *args[], t_env **env);
+int			builtin_env(char *args[], t_env *env);
+int			builtin_unset(char **args, t_env **env);
+int			builtin_exit(char *args[]);
 
 #endif
