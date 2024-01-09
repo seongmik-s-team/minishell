@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:54:56 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 13:33:56 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:04:46 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	heredoc_read(char *delimiter)
 
 	filename = unique_filename();
 	fd = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+	free(filename);
 	if (fd == -1)
 		return (FAILURE);
 	delimiter_len = ft_strlen(delimiter) + 1;

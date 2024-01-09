@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:44:57 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 15:48:07 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:59:59 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,9 @@ int	ft_exec(t_command *cmd, t_env *env)
 	envp = env_to_envp(env);
 	execve(cmd->args[0], cmd->args, envp);
 	path_env = env_find(env, "PATH");
-	if (path_env == NULL)
+	if (path_env == NULL || path_env->pair->value == NULL)
 		return (FAILURE);
-	path = path_env->pair->value;
-	if (path == NULL)
-		return (FAILURE);
-	paths = ft_split(path, ':');
+	paths = ft_split(path_env->pair->value, ':');
 	i = 0;
 	while (paths[i])
 	{

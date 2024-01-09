@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:27:48 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 15:18:33 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:56:42 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ char	**env_to_envp(t_env *env)
 {
 	size_t	i;
 	char	**envp;
-	char	*tmp;
 
 	envp = (char **)malloc(sizeof(char *) * (env_len(env) + 1));
 	if (envp == NULL)
@@ -110,17 +109,9 @@ char	**env_to_envp(t_env *env)
 	while (env != NULL)
 	{
 		if (env->pair->value != NULL)
-		{
-			tmp = ft_strjoin(env->pair->key, "=");
-			envp[i] = ft_strjoin(tmp, env->pair->value);
-			free(tmp);
-		}
+			envp[i] = modifier_trpjoin(env->pair->key, "=", env->pair->value);
 		else
-		{
-			tmp = envp[i];
 			envp[i] = ft_strdup(env->pair->key);
-			free(tmp);
-		}
 		i++;
 		env = env->next;
 	}
