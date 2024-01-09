@@ -6,29 +6,29 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 18:25:30 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/04 15:41:35 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:23:54 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // builtin_pwd() 함수는 pwd 명령어를 실행하는 함수이다.
-int	builtin_pwd(void)
+int	builtin_pwd(t_shell_info *shinfo)
 {
 	char	*cwd;
 
-	cwd = getcwd(NULL, 0);
+	cwd = ft_getcwd(shinfo);
 	if (cwd == NULL)
 	{
 		write(2, "minishell: pwd: ", 16);
 		write(2, strerror(errno), ft_strlen(strerror(errno)));
 		write(2, "\n", 1);
-		return (EXIT_FAILURE);
+		return (FAILURE);
 	}
 	write(1, cwd, ft_strlen(cwd));
 	write(1, "\n", 1);
 	free(cwd);
-	return (EXIT_SUCCESS);
+	return (SUCCESS);
 }
 
 // // execve()로 실행되는 경우

@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 20:27:48 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/06 19:59:32 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:56:42 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ t_env	*env_find(t_env *env, char *key)
 }
 
 // env_del() 함수는 env에서 key에 해당하는 환경변수를 삭제하는 함수이다.
-int	env_del(t_env *env, char *key)
+int	env_del(t_env **env, char *key)
 {
 	t_env	*target;
 
-	target = env_find(env, key);
+	target = env_find(*env, key);
 	if (target == NULL)
 		return (SUCCESS);
 	if (target->pair)
@@ -44,6 +44,10 @@ int	env_del(t_env *env, char *key)
 		target->prev->next = target->next;
 	if (target->next)
 		target->next->prev = target->prev;
+	if (target == *env && target->next != NULL)
+		*env = target->next;
+	if (target == *env && target->next == NULL)
+		*env = NULL;
 	free(target);
 	return (SUCCESS);
 }
@@ -55,7 +59,7 @@ int	env_add(t_env **env, char *key, char *value)
 	t_env	*last;
 
 	if (*env != NULL)
-		env_del(*env, key);
+		env_del(env, key);
 	new = (t_env *)malloc(sizeof(t_env));
 	if (new == NULL)
 		return (FAILURE);
@@ -100,15 +104,12 @@ char	**env_to_envp(t_env *env)
 
 	envp = (char **)malloc(sizeof(char *) * (env_len(env) + 1));
 	if (envp == NULL)
-		return (NULL);
+		return (FAULURE_NULL);
 	i = 0;
 	while (env != NULL)
 	{
 		if (env->pair->value != NULL)
-		{
-			envp[i] = ft_strjoin(env->pair->key, "=");
-			envp[i] = ft_strjoin(envp[i], env->pair->value);
-		}
+			envp[i] = modifier_trpjoin(env->pair->key, "=", env->pair->value);
 		else
 			envp[i] = ft_strdup(env->pair->key);
 		i++;

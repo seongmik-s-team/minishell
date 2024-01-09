@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 17:34:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/05 20:31:07 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:18:47 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,4 @@ int	set_sigint(void)
 
 	act.sa_handler = (void *) set_sigint_act;
 	return (sigaction(SIGINT, &act, NULL));
-}
-
-// init_sig_setting() 함수는 signal을 설정하는 함수이다.
-int	init_sig_setting(void)
-{
-	if (set_sigquit())
-		return (EXIT_FAILURE);
-	if (set_sigint())
-		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);
 }

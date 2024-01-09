@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/06 19:13:38 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 16:58:25 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,38 @@ void	print_args(char **args)
 }
 
 // split을 이용해 커멘드 파싱 & 실행하는 테스트 메서드
-void	do_split_command(char *line, t_env *env)
+void	do_split_command(char *line, t_env **env, t_shell_info *shinfo)
 {
 	t_command	*cmd;
 	char		**args;
 
 	args = ft_split(line, ' ');
-	print_args(args);
-	if (args[0] != NULL && is_builtin(args[0]))
-		do_builtin(args, env, is_builtin(args[0]));
-	else if (args[0] != NULL && ft_strncmp(args[0], "<<", 3) == 0)
-		heredoc_read(args[1]);
-	else if (args[0] != NULL)
+	cmd = command_new(args, ft_strdup("stdin"), ft_strdup("stdout"));
+	word_expand(cmd, *env);
+	if (cmd->args[0] == NULL)
 	{
-		cmd = command_new(args[0], args, "stdin", "stdout");
-		execute_command(cmd, env);
+		free_cmd(cmd);
+		return ;
 	}
+	if (cmd->args[0] != NULL && is_builtin(cmd->args[0]))
+		do_builtin(shinfo, cmd->args, env, is_builtin(cmd->args[0]));
+	else if (cmd->args[0] != NULL && ft_strncmp(cmd->args[0], "<<", 3) == 0)
+		heredoc_read(&(cmd->args[1]), quote_judge_and_del(&(cmd->args[1])), \
+					*env);
+	else if (cmd->args[0] != NULL)
+		execute_command(cmd, env, shinfo);
+	free_cmd(cmd);
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_env		*env;
-	char		*line;
+	t_shell_info	shell_info;
+	char			*line;
 
 	(void) argc;
 	(void) argv;
-	init_sig_setting();
-	init_env(&env, envp);
-	while (1)
+	init_shell(&shell_info, envp);
+	while (TRUE)
 	{
 		line = readline("minishell$ ");
 		if (line == NULL)
@@ -62,8 +66,8 @@ int	main(int argc, char *argv[], char *envp[])
 			exit(0);
 		}
 		add_history(line);
-		do_split_command(line, env);
+		do_split_command(line, &(shell_info.env), &shell_info);
 		free(line);
 	}
-	exit(0);
+	exit(SUCCESS);
 }
