@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 18:07:29 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 18:09:47 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	do_split_command(char *line, t_env **env, t_shell_info *shinfo)
 {
 	t_command	*cmd;
 	char		**args;
-	int			ret;
 
 	args = ft_split(line, ' ');
 	cmd = command_new(args, ft_strdup("stdin"), ft_strdup("stdout"));
@@ -40,16 +39,13 @@ void	do_split_command(char *line, t_env **env, t_shell_info *shinfo)
 		free_cmd(cmd);
 		return ;
 	}
-	ret = SUCCESS;
 	if (cmd->args[0] != NULL && is_builtin(cmd->args[0]))
-		ret = do_builtin(shinfo, cmd->args, env, is_builtin(cmd->args[0]));
+		do_builtin(shinfo, cmd->args, env, is_builtin(cmd->args[0]));
 	else if (cmd->args[0] != NULL && ft_strncmp(cmd->args[0], "<<", 3) == 0)
-		ret = heredoc_read(&(cmd->args[1]), \ 
+		heredoc_read(&(cmd->args[1]), \
 							quote_judge_and_del(&(cmd->args[1])), *env);
 	else if (cmd->args[0] != NULL)
-		ret = execute_command(cmd, env, shinfo);
-	if (ret == FAILURE)
-		exit(FAILURE);
+		execute_command(cmd, env, shinfo);
 	free_cmd(cmd);
 }
 
