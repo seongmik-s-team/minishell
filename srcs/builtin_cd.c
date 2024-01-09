@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:13:35 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 18:59:35 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 19:05:10 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	do_cd(t_shell_info *shinfo, char *path, t_env **env)
 	set_oldpwd(shinfo, env, oldcwd);
 	if (chdir(path) != 0)
 	{
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd("cd: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd(": ", 2);
@@ -108,7 +109,7 @@ int	builtin_cd(char *args[], t_env **env, t_shell_info *shinfo)
 		home = env_find(*env, "HOME");
 		if (home == NULL)
 		{
-			ft_putstr_fd("cd: HOME not set\n", 2);
+			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 			return (FAILURE);
 		}
 		path = home->pair->value;
