@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:55 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 16:55:34 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:45:20 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 # define MINISHELL_H
 
 /* ***************************** custom headers ***************************** */
+
 # include "../srcs/libft/libft.h"
 
 /* ***************************** system headers ***************************** */
+
 # include <fcntl.h>
 # include <stdio.h>
 # include <readline/readline.h>
@@ -32,6 +34,7 @@
 # include <stddef.h>
 
 /* ******************************** defines ********************************* */
+
 # define SUCCESS			0
 # define FAILURE			1
 # define FAULURE_NULL		((void *)0)
@@ -99,6 +102,7 @@ typedef struct s_command
 }				t_command;
 
 /* ****************************** string utils ****************************** */
+
 int			judge_isspace(char c);
 int			judge_isalldigit(char *str);
 int			judge_isblank(char *str);
@@ -116,19 +120,23 @@ int			quote_judge_and_del(char **str);
 size_t		get_strslen(char **strs);
 
 /* ******************************** here doc ******************************** */
+
 int			heredoc_read(char **delimiter, int is_quoted, t_env *env);
 char		*unique_filename(void);
 
 /* ********************************* signal ********************************* */
+
 int			set_sigquit(void);
 void		set_sigint_act(void);
 int			set_sigint(void);
 
 /* ***************************** minishell utils **************************** */
+
 void		sh_error(char *cmd, char *msg);
 char		*ft_getcwd(t_shell_info *shinfo);
 
 /* ***************************** shell initialize *************************** */
+
 int			init_oldpwd(t_env **env, char **sholdpwd);
 int			init_pwd(t_env **env, char **shpwd);
 int			init_pwds(t_env **env, char **shpwd, char **sholdpwd);
@@ -137,20 +145,24 @@ int			init_sig_setting(void);
 int			init_shell(t_shell_info *shinfo, char *envp[]);
 
 /* ******************************* free_utils ******************************* */
+
 void		free_args(char **args);
 void		free_redirections(t_redirect **redirects);
 void		free_cmd(t_command *cmd);
 
 /* ******************************* word expand ****************************** */
+
 char		*expand_by_env(char *str, t_env *env);
 void		word_expand(t_command *cmd, t_env *env);
 void		args_pull(char **args, size_t len);
 
 /* ********************************* command ******************************** */
+
 int			execute_command(t_command *cmd, t_env **env, t_shell_info *shinfo);
 t_command	*command_new(char **args, char *infile, char *outfile);
 
 /* *********************************** env ********************************** */
+
 t_env		*env_find(t_env *env, char *key);
 int			env_del(t_env **env, char *key);
 int			env_add(t_env **env, char *key, char *value);
@@ -164,6 +176,7 @@ int			init_env(t_env **env, char *envp[]);
 t_pair		make_pair(char *str);
 
 /* ********************************* builtin ******************************** */
+
 int			return_and_free(int builtin_nbr, char *lower_path);
 int			is_builtin(char *path);
 int			do_builtin(t_shell_info *shinfo, char **args, t_env **env, \
