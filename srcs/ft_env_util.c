@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 17:07:59 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 17:18:03 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:21:28 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,18 @@
 t_env	*env_copy(t_env *origin)
 {
 	t_env	*copy;
-	char	*copy_key;
-	char	*copy_value;
+	char	*copied_key;
+	char	*copied_value;
 
 	copy = NULL;
 	while (origin != NULL)
 	{
-		copy_key = ft_strdup(origin->pair->key);
+		copied_key = ft_strdup(origin->pair->key);
 		if (origin->pair->value != NULL)
-			copy_value = ft_strdup(origin->pair->value);
+			copied_value = ft_strdup(origin->pair->value);
 		else
-			copy_value = NULL;
-		env_add(&copy, copy_key, copy_value);
+			copied_value = NULL;
+		env_add(&copy, copied_key, copied_value);
 		origin = origin->next;
 	}
 	return (copy);

@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 17:13:35 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 13:23:11 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:52:43 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_getcwd(t_shell_info *shinfo)
 	if (cwd == NULL && shinfo->pwd != NULL)
 		return (ft_strdup(shinfo->pwd));
 	if (cwd == NULL && shinfo->pwd == NULL)
-		return (NULL);
+		return (FAULURE_NULL);
 	return (cwd);
 }
 

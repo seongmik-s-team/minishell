@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/24 15:45:20 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 17:50:19 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:50:00 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,26 @@ void	print_args(char **args)
 }
 
 // split을 이용해 커멘드 파싱 & 실행하는 테스트 메서드
-void	do_split_command(t_shell_info *shinfo, char *line, t_env **env, int *heredoc_idx)
+void	do_split_command(char *line, t_env **env, t_shell_info *shinfo)
 {
 	t_command	*cmd;
 	char		**args;
 
 	args = ft_split(line, ' ');
-	if (args[0] == NULL)
-		return ;
-	cmd = command_new(ft_strdup(args[0]), args, "stdin", "stdout");
-	// print_args(cmd->args);
+	cmd = command_new(args, ft_strdup("stdin"), ft_strdup("stdout"));
 	word_expand(cmd, *env);
-	// print_args(cmd->args);
-	if (cmd->path != NULL && is_builtin(cmd->path))
-		do_builtin(shinfo, cmd->args, env, is_builtin(cmd->path));
-	else if (args[0] != NULL && ft_strncmp(args[0], "<<", 3) == 0)
-		heredoc_read(args[1], heredoc_idx);
-	else if (args[0] != NULL)
-		execute_command(shinfo, cmd, env);
+	if (cmd->args[0] == NULL)
+	{
+		free_cmd(cmd);
+		return ;
+	}
+	if (cmd->args[0] != NULL && is_builtin(cmd->args[0]))
+		do_builtin(shinfo, cmd->args, env, is_builtin(cmd->args[0]));
+	else if (cmd->args[0] != NULL && ft_strncmp(cmd->args[0], "<<", 3) == 0)
+		heredoc_read(cmd->args[1]);
+	else if (cmd->args[0] != NULL)
+		execute_command(cmd, env, shinfo);
+	free_cmd(cmd);
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -54,7 +56,7 @@ int	main(int argc, char *argv[], char *envp[])
 	(void) argc;
 	(void) argv;
 	init_shell(&shell_info, envp);
-	while (1)
+	while (TRUE)
 	{
 		line = readline("minishell$ ");
 		if (line == NULL)
@@ -63,8 +65,8 @@ int	main(int argc, char *argv[], char *envp[])
 			exit(0);
 		}
 		add_history(line);
-		do_split_command(&shell_info, line, &(shell_info.env), &(shell_info.heredoc_idx));
+		do_split_command(line, &(shell_info.env), &shell_info);
 		free(line);
 	}
-	exit(0);
+	exit(SUCCESS);
 }

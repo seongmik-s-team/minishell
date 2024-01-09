@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 17:14:03 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 13:24:38 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 13:34:32 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	init_sig_setting(void)
 // init_shell() 함수는 minishell을 초기화하는 함수이다.
 int	init_shell(t_shell_info *shinfo, char *envp[])
 {
-	shinfo->heredoc_idx = 0;
 	init_sig_setting();
 	init_env(&(shinfo->env), envp);
 	if (init_pwds(&(shinfo->env), &(shinfo->pwd), &(shinfo->oldpwd)) == FAILURE)

@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 16:33:44 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/08 15:44:18 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 14:51:05 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	judge_isspace(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n' \
 		|| c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
 // judge_isalldigit() 함수는 문자열이 모두 숫자로 이루어져 있는지 확인하는 함수이다.
@@ -30,10 +30,10 @@ int	judge_isalldigit(char *str)
 	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
-			return (0);
+			return (FALSE);
 		i++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 // judge_isblank() 함수는 문자열이 모두 공백으로 이루어져 있는지 확인하는 함수이다.
@@ -45,8 +45,25 @@ int	judge_isblank(char *str)
 	while (str[i] != '\0')
 	{
 		if (judge_isspace(str[i]) == 0)
-			return (0);
+			return (FALSE);
 		i++;
 	}
-	return (1);
+	return (TRUE);
+}
+
+// judge_isblank_and_null() 함수는 문자열이 모두 공백으로 이루어져 있는지 확인하는 함수이다.
+int	judge_isblank_and_null(char *str)
+{
+	int	i;
+
+	if (str == NULL)
+		return (TRUE);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (judge_isspace(str[i]) == 0)
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }

@@ -6,7 +6,7 @@
 #    By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/03 19:51:24 by seongmik          #+#    #+#              #
-#    Updated: 2024/01/08 17:55:03 by seongmik         ###   ########.fr        #
+#    Updated: 2024/01/09 15:48:20 by seongmik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,10 +47,12 @@ SRCS							:=	$(SRCS_DIR)/minishell.c \
 									$(SRCS_DIR)/execute_command.c \
 									$(SRCS_DIR)/string_judge.c \
 									$(SRCS_DIR)/string_modifier.c \
+									$(SRCS_DIR)/string_get.c \
 									$(SRCS_DIR)/command.c \
 									$(SRCS_DIR)/heredoc.c \
 									$(SRCS_DIR)/setting_signal.c \
 									$(SRCS_DIR)/shell_error.c \
+									$(SRCS_DIR)/shell_free.c \
 									$(SRCS_DIR)/word_expand.c \
 									$(SRCS_DIR)/word_expand_util.c \
 									$(SRCS_DIR)/init_shell.c \

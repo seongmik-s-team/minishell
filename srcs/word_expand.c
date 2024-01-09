@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 19:41:56 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 13:22:01 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:15:19 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,41 +54,43 @@ char	*expand_by_env(char *str, t_env *env)
 {
 	int		dollar_idx;
 	char	*word;
-	char	*expanded_word;
-	char	*rear_str;
-	t_env	*tmp;
+	char	*expanded;
+	char	*ret;
+	t_env	*exist_env;
 
-	while (1)
+	if (str == NULL)
+		return (NULL);
+	while (TRUE)
 	{
 		dollar_idx = find_word(str);
 		if (dollar_idx == -1)
 			return (str);
 		word = to_word(str, dollar_idx);
-		tmp = env_find(env, word);
-		if (tmp == NULL)
-			return (str);
-		expanded_word = ft_substr(str, 0, dollar_idx);
-		if (tmp->pair->value != NULL)
-			expanded_word = ft_strjoin(expanded_word, tmp->pair->value);
+		exist_env = env_find(env, word);
+		if (exist_env != NULL && exist_env->pair->value != NULL)
+			expanded = exist_env->pair->value;
 		else
-			expanded_word = ft_strjoin(expanded_word, "");
-		rear_str = ft_substr(str, dollar_idx + ft_strlen(word) + 1, \
-								ft_strlen(str) - dollar_idx - ft_strlen(word));
-		expanded_word = ft_strjoin(expanded_word, rear_str);
-		str = expanded_word;
+			expanded = "";
+		ret = modifier_replace(str, expanded, dollar_idx, ft_strlen(word) + 1);
+		free(word);
+		free(str);
+		str = ret;
 	}
 	return (str);
 }
 
-// word_expand() 함수는 command 구조체에 저장된 path와 args를 환경변수로 워드확장하는 함수이다.
+// word_expand() 함수는 command 구조체에 저장된 args를 환경변수로 워드확장하는 함수이다.
 void	word_expand(t_command *cmd, t_env *env)
 {
 	int		i;
+	size_t	len;
 
 	i = 0;
+	len = get_strslen(cmd->args);
 	while (cmd->args[i] != NULL)
 	{
 		cmd->args[i] = expand_by_env(cmd->args[i], env);
 		i++;
 	}
+	args_pull(cmd->args, len);
 }

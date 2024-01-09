@@ -6,7 +6,7 @@
 /*   By: seongmik <seongmik@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 14:44:57 by seongmik          #+#    #+#             */
-/*   Updated: 2024/01/09 13:24:13 by seongmik         ###   ########.fr       */
+/*   Updated: 2024/01/09 15:48:07 by seongmik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,19 @@ int	is_builtin(char *path)
 	lower_path = modifier_tolower(path);
 	if (lower_path == NULL)
 		sh_error("minishell", strerror(errno));
-	if (ft_strncmp(path, "echo", 5) == 0)
+	if (ft_strncmp(lower_path, "echo", 5) == 0)
 		return (return_and_free(BUILTIN_ECHO, lower_path));
-	else if (ft_strncmp(path, "cd", 3) == 0)
+	else if (ft_strncmp(lower_path, "cd", 3) == 0)
 		return (return_and_free(BUILTIN_CD, lower_path));
-	else if (ft_strncmp(path, "pwd", 4) == 0)
+	else if (ft_strncmp(lower_path, "pwd", 4) == 0)
 		return (return_and_free(BUILTIN_PWD, lower_path));
-	else if (ft_strncmp(path, "export", 7) == 0)
+	else if (ft_strncmp(lower_path, "export", 7) == 0)
 		return (return_and_free(BUILTIN_EXPORT, lower_path));
-	else if (ft_strncmp(path, "unset", 6) == 0)
+	else if (ft_strncmp(lower_path, "unset", 6) == 0)
 		return (return_and_free(BUILTIN_UNSET, lower_path));
-	else if (ft_strncmp(path, "env", 4) == 0)
+	else if (ft_strncmp(lower_path, "env", 4) == 0)
 		return (return_and_free(BUILTIN_ENV, lower_path));
-	else if (ft_strncmp(path, "exit", 5) == 0)
+	else if (ft_strncmp(lower_path, "exit", 5) == 0)
 		return (return_and_free(BUILTIN_EXIT, lower_path));
 	return (return_and_free(0, lower_path));
 }
@@ -54,7 +54,7 @@ int	ft_exec(t_command *cmd, t_env *env)
 	size_t	i;
 
 	envp = env_to_envp(env);
-	execve(cmd->path, cmd->args, envp);
+	execve(cmd->args[0], cmd->args, envp);
 	path_env = env_find(env, "PATH");
 	if (path_env == NULL)
 		return (FAILURE);
@@ -65,8 +65,7 @@ int	ft_exec(t_command *cmd, t_env *env)
 	i = 0;
 	while (paths[i])
 	{
-		path = ft_strjoin(paths[i], "/");
-		path = ft_strjoin(path, cmd->path);
+		path = modifier_trpjoin(paths[i], "/", cmd->args[0]);
 		execve(path, cmd->args, envp);
 		if (paths[i] != NULL)
 			free(paths[i]);
@@ -90,19 +89,20 @@ void	ft_free_strs(char **strs)
 }
 
 // executor_command() 함수는 명령어를 실행하는 함수이다.
-int	execute_command(t_shell_info *shinfo, t_command *cmd, t_env **env)
+int	execute_command(t_command *cmd, t_env **env, t_shell_info *shinfo)
 {
 	int		pid;
 	int		ret;
+	t_env	*copied_env;
 
-	// word_expand(cmd, env);
-	if (is_builtin(cmd->path))
-		return (do_builtin(shinfo, cmd->args, env, is_builtin(cmd->path)));
+	if (is_builtin(cmd->args[0]))
+		return (do_builtin(shinfo, cmd->args, env, is_builtin(cmd->args[0])));
+	copied_env = env_copy(*env);
 	pid = fork();
 	if (pid == 0)
 	{
-		ret = ft_exec(cmd, *env);
 		free_env(*env);
+		ret = ft_exec(cmd, copied_env);
 		if (ret == FAILURE)
 			sh_error(cmd->args[0], strerror(errno));
 		else
@@ -112,5 +112,6 @@ int	execute_command(t_shell_info *shinfo, t_command *cmd, t_env **env)
 		sh_error(cmd->args[0], strerror(errno));
 	else
 		wait(&pid);
+	free_env(copied_env);
 	return (SUCCESS);
 }
